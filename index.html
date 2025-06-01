@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Certified Ethical Hacker & Penetration Tester Portfolio" />
+  <title>Curt Hayman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Curt Hayman, CEH | Penetration Tester</h1>
+    <div id="hireBanner">I'm currently available for hire</div>
+  </header>
+
+  <button class="toggle-btn" onclick="toggleView()">Toggle Terminal View</button>
+
+  <section id="bio-section">
+    <div class="terminal-section">
+      <div class="terminal-line">I am a seasoned professional in the realm of cybersecurity...</div>
+      <div class="terminal-line">I also have been flying drones lately — check out my profile on <a href="https://droners.com/curtthecoder" target="_blank">Droners</a>!</div>
+      <div class="terminal-line">My expertise extends beyond the cyber realm. With over 15 years of WordPress Administration mastery...</div>
+      <div class="terminal-line">Outside of work, I’m a dedicated family man... <a href="https://www.facebook.com/groups/undergroundhiphoponly" target="_blank">38K members</a> strong!</div>
+      <div class="terminal-line">Oh— and I’m a lifelong <strong>Sneaker Head</strong> 👟.</div>
+      <div class="terminal-line">I am also the President of <a href="https://haytreewebservices.com" target="_blank">HayTree Web Services</a>.</div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Certifications</h3>
+    <div class="cert-section-wrapper">
+      <button class="scroll-btn" onclick="scrollCerts(-300)">&#8592;</button>
+      <div class="badges-wrapper" id="certScroll">
+        <div class="badge" onclick="expandImage('certificateech.png')" title="Issued: July 16, 2023\nExpires: July 15, 2026">
+          <img src="certificateech.png" alt="CEH Certificate" class="cert-img" />
+        </div>
+        <div class="badge" onclick="expandImage('dfecertificate.png')" title="Issued: Jan 1, 2024">
+          <img src="dfecertificate.png" alt="Digital Forensics Certificate" class="cert-img" />
+        </div>
+        <div class="badge" onclick="expandImage('bugbountyhunting.png')" title="Issued: Jan 10, 2024">
+          <img src="bugbountyhunting.png" alt="Bug Bounty Certificate" class="cert-img" />
+        </div>
+        <div class="badge" onclick="expandImage('masterethicalhacker.png')" title="Issued: Feb 26, 2024">
+          <img src="masterethicalhacker.png" alt="Master Ethical Hacker Certificate" class="cert-img" />
+        </div>
+        <div class="badge" onclick="expandImage('masterwifihacking.png')" title="Issued: Feb 28, 2024">
+          <img src="masterwifihacking.png" alt="Master Wifi Hacking Certificate" class="cert-img" />
+        </div>
+        <div class="badge" onclick="expandImage('wireshark-certificate.jpeg')" title="Issued: Oct 8, 2023\nExpires: Oct 7, 2026">
+        <img src="wireshark-certificate.jpeg" alt="WireShark Certificate" class="cert-img" />
+        </div>
+      </div>
+      <button class="scroll-btn" onclick="scrollCerts(300)">&#8594;</button>
+    </div>
+  </section>
+
+  <div id="certModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <div class="commands-section">
+    <h3>My Favorite Commands</h3>
+    <div class="command-group">
+      <div class="cmd-label">Get memory statistics, run:</div>
+      <div class="command-terminal">
+        <div class="typed-line" id="line1"></div>
+        <button class="copy-btn" onclick="copyText('top -l 1 | head -n 10 | grep PhysMem | sed \"s/, /\\n /g\"')">Copy</button>
+      </div>
+    </div>
+    <div class="command-group">
+      <div class="cmd-label">Cache Flush on Mac, run:</div>
+      <div class="command-terminal">
+        <div class="typed-line" id="line2"></div>
+        <button class="copy-btn" onclick="copyText('sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed')">Copy</button>
+      </div>
+    </div>
+    <div class="command-group">
+      <div class="cmd-label">Find Vulnerable Ports, run:</div>
+      <div class="command-terminal">
+        <div class="typed-line" id="line3"></div>
+        <button class="copy-btn" onclick="copyText('sudo nmap -sV --script=vuln targetip')">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="cli-box" id="cliBox">
+    <div id="cliOutput"></div>
+    <form id="cliForm" autocomplete="off">
+      <span>curt@portfolio:~$</span>
+      <input id="cliInput" type="text" />
+    </form>
+  </section>
+
+  <section class="system-info" id="systemInfo">
+    <h3>🧠 Visitor System Info</h3>
+    <p><strong>User Agent:</strong> <span id="ua"></span></p>
+    <p><strong>Platform:</strong> <span id="platform"></span></p>
+  </section>
+
+  <footer>
+    <p>Deploy this site via <code>vercel --prod</code> | Source on <a href="https://github.com/yourusername/yourrepo" target="_blank">GitHub</a></p>
+  </footer>
+
+  <script>
+    function toggleView() {
+      const bio = document.getElementById('bio-section');
+      bio.classList.toggle('clean-view');
+    }
+
+    function scrollCerts(amount) {
+      const container = document.getElementById('certScroll');
+      container.scrollLeft += amount;
+    }
+
+    function expandImage(src) {
+      const modal = document.getElementById('certModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = "block";
+      modalImg.src = src;
+    }
+
+    function closeModal() {
+      document.getElementById('certModal').style.display = "none";
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ Command copied to clipboard!");
+      });
+    }
+
+    function startTyping() {
+      const commands = [
+        "top -l 1 | head -n 10 | grep PhysMem | sed 's/, /\\n /g'",
+        "sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed",
+        "sudo nmap -sV --script=vuln targetip"
+      ];
+      typeLine(commands[0], 'line1', () => {
+        typeLine(commands[1], 'line2', () => {
+          typeLine(commands[2], 'line3');
+        });
+      });
+    }
+
+    function typeLine(text, elementId, callback) {
+      let i = 0;
+      const el = document.getElementById(elementId);
+      el.textContent = '';
+      const interval = setInterval(() => {
+        el.textContent += text[i];
+        i++;
+        if (i === text.length) {
+          clearInterval(interval);
+          if (callback) setTimeout(callback, 300);
+        }
+      }, 40);
+    }
+
+    function displaySystemInfo() {
+      const sysInfo = document.getElementById('systemInfo');
+      const agent = navigator.userAgent;
+      const platform = navigator.platform;
+      sysInfo.innerHTML = `<h3>🧠 Visitor System Info</h3>
+        <p><strong>User Agent:</strong> ${agent}</p>
+        <p><strong>Platform:</strong> ${platform}</p>`;
+    }
+
+    // CLI Terminal Logic
+    const cliOutput = document.getElementById('cliOutput');
+    const cliForm = document.getElementById('cliForm');
+    const cliInput = document.getElementById('cliInput');
+
+    const commands = {
+      help: "Available commands: :help, about, clear, certs, social, exit",
+      about: "Curt Hayman, CEH | Penetration Tester. 15+ years WordPress, drone pilot, sneakerhead.",
+      certs: "CEH, Digital Forensics, Bug Bounty, Master Ethical Hacker, Master Wifi Hacking, Wireshark.",
+      social: "Droners: <a href='https://droners.com/curtthecoder' target='_blank'>Profile</a> | Facebook: <a href='https://www.facebook.com/groups/undergroundhiphoponly' target='_blank'>38K members</a>",
+      exit: "Session ended. Refresh to restart."
+    };
+
+    function printLine(text, isHtml) {
+      const div = document.createElement('div');
+      if (isHtml) {
+        div.innerHTML = text;
+      } else {
+        div.textContent = text;
+      }
+      cliOutput.appendChild(div);
+      cliOutput.scrollTop = cliOutput.scrollHeight;
+    }
+
+    cliForm.onsubmit = function(e) {
+      e.preventDefault();
+      const cmd = cliInput.value.trim();
+      printLine(`<span style="color:#fff;">curt@portfolio:~$</span> ${cmd}`, true);
+      if (cmd === ":help" || cmd === "help") printLine(commands.help);
+      else if (cmd === "about") printLine(commands.about);
+      else if (cmd === "certs") printLine(commands.certs);
+      else if (cmd === "social") printLine(commands.social, true);
+      else if (cmd === "clear") cliOutput.innerHTML ="";
+      else if (cmd === "exit") { printLine(commands.exit); cliInput.disabled = true; }
+      else if (cmd) printLine("Command not found. Type :help for options.");
+      cliInput.value = "";
+    };
+
+    printLine("Welcome to curt@terminal");
+    printLine("Type :help for commands.");
+    cliInput.focus();
+
+    window.onload = () => {
+     startTyping();
+      displaySystemInfo();
+      cliInput.focus();
+    };
+  </script>
+</body>
+</html>
