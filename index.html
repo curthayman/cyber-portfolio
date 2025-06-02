@@ -4,19 +4,61 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Certified Ethical Hacker & Penetration Tester Portfolio" />
-  <title>Curt Hayman, CEH</title>
+  <!-- Primary Meta Tags -->
+<title>Curt Hayman, CEH | Penetration Tester & Ethical Hacker Portfolio</title>
+<meta name="title" content="Curt Hayman, CEH | Penetration Tester & Ethical Hacker Portfolio">
+<meta name="description" content="Curt Hayman is a Certified Ethical Hacker and Penetration Tester with 15+ years of experience in cybersecurity, WordPress, and digital forensics. Available for freelance and consulting projects.">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iamcurthayman.com/">
+<meta property="og:title" content="Curt Hayman, CEH | Penetration Tester & Ethical Hacker Portfolio">
+<meta property="og:description" content="Curt Hayman is a Certified Ethical Hacker and Penetration Tester with 15+ years of experience in cybersecurity, WordPress, and digital forensics. Available for freelance and consulting projects.">
+<meta property="og:image" content="https://iamcurthayman.com/curt-profile-og.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://iamcurthayman.com/">
+<meta property="twitter:title" content="Curt Hayman, CEH | Penetration Tester & Ethical Hacker Portfolio">
+<meta property="twitter:description" content="Curt Hayman is a Certified Ethical Hacker and Penetration Tester with 15+ years of experience in cybersecurity, WordPress, and digital forensics. Available for freelance and consulting projects.">
+<meta property="twitter:image" content="https://iamcurthayman.com/curt-profile-og.jpg">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://iamcurthayman.com/" />
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+<!-- Keywords -->
+<meta name="keywords" content="Curt Hayman, penetration tester, ethical hacker, cybersecurity, WordPress security, digital forensics, bug bounty, drone pilot, Baltimore, freelance, consulting">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Fira Code', monospace;
-      background-color: #0f0f0f;
+      background: #0f0f0f url('curtspage.png') center center no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
       color: #e0e0e0;
+      position: relative;
+      min-height: 100vh;
+    }
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(15,15,15,0.78);
+      z-index: 0;
+      pointer-events: none;
+    }
+    header, section, .cli-box, .system-info, footer, .commands-section {
+      position: relative;
+      z-index: 1;
     }
     header {
       padding: 2rem;
       text-align: center;
-      background-color: #1f1f1f;
+      background-color: #1f1f1fbb;
       position: relative;
     }
     header h1 {
@@ -34,6 +76,19 @@
       border-radius: 4px;
       animation: pulse 1.2s infinite;
     }
+    @media (max-width: 600px) {
+      #hireBanner {
+        position: static;
+        display: block;
+        margin: 1rem auto 0 auto;
+        width: fit-content;
+        float: none;
+        text-align: center;
+      }
+      header {
+        padding-top: 1.5rem;
+      }
+    }
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.05); opacity: 0.6; }
@@ -42,15 +97,28 @@
       max-width: 800px;
       margin: 2rem auto;
       padding: 1rem;
+      background: transparent;
     }
     a {
       color: #00ff99;
       text-decoration: none;
+      border-bottom: 2px solid #00ff99;
+      box-shadow: 0 2px 0 0 #00ff99;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    a:hover, a:focus {
+      background: #00ff99;
+      color: #0f0f0f;
+      border-bottom: 2px solid #00ff99;
+      box-shadow: none;
     }
     .terminal-line {
       padding-left: 2rem;
       margin-bottom: 1rem;
       position: relative;
+      min-height: 1.2em;
+      opacity: 1;
     }
     .terminal-line::before {
       content: "➜";
@@ -64,20 +132,92 @@
     .clean-view .terminal-line {
       padding-left: 0;
     }
-    .toggle-btn {
+    .contact-btn {
       background: #00ff99;
       color: #0f0f0f;
       border: none;
-      padding: 0.5rem 1rem;
-      margin: 1rem auto;
+      padding: 0.5rem 1.2rem;
+      margin: 1rem auto 2rem auto;
       display: block;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 1rem;
       border-radius: 4px;
+      z-index: 2;
+      position: relative;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 8px #0004;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-btn:hover, .contact-btn:focus {
+      background: #0f0f0f;
+      color: #00ff99;
+      border: 2px solid #00ff99;
+    }
+    .contact-modal {
+      display: none;
+      position: fixed;
+      z-index: 10001;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85);
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-modal-content {
+      background: #181f1f;
+      color: #00ff99;
+      border-radius: 10px;
+      padding: 2rem 2.5rem;
+      max-width: 90vw;
+      min-width: 280px;
+      box-shadow: 0 0 24px #00ff9955;
+      position: relative;
+      text-align: center;
+      font-size: 1.1rem;
+      font-family: 'Fira Code', monospace;
+    }
+    .contact-modal-content h2 {
+      margin-top: 0;
+      color: #00ff99;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+    }
+    .contact-modal-content a {
+      color: #00ff99;
+      border-bottom: 1.5px solid #00ff99;
+      box-shadow: none;
+      background: none;
+      font-size: 1.1rem;
+      word-break: break-all;
+    }
+    .contact-modal-content a:hover {
+      background: #00ff99;
+      color: #0f0f0f;
+    }
+    .contact-modal-close {
+      position: absolute;
+      top: 0.7rem;
+      right: 1.2rem;
+      color: #00ff99;
+      font-size: 2.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 2;
+      transition: color 0.2s;
+    }
+    .contact-modal-close:hover {
+      color: #fff;
     }
     @media (max-width: 600px) {
-      .toggle-btn {
-        display: none;
+      .contact-modal-content {
+        padding: 1.2rem 0.5rem;
+        font-size: 1rem;
+      }
+      .contact-modal-content h2 {
+        font-size: 1.1rem;
       }
     }
     .cert-section-wrapper {
@@ -159,7 +299,7 @@
       padding: 1rem;
     }
     .command-group {
-      margin-bottom: 2rem;
+      margin-bottom:2rem;
     }
     .cmd-label {
       margin-bottom: 0.5rem;
@@ -216,12 +356,12 @@
       padding: 2rem;
       font-size: 0.9rem;
       color: #888;
+      background: transparent;
     }
     .cli-prompt::after {
       content: "_";
       animation: blink 1s step-end infinite;
     }
-    /* CLI box styling */
     .cli-box {
       background: #1e1e1e;
       color: #00ff99;
@@ -232,60 +372,112 @@
       margin: 2rem auto;
       box-sizing: border-box;
     }
-    #cliOutput {
-      min-height: 120px;
-      font-size: 1em;
-      margin-bottom: 0.5em;
-      word-break: break-word;
-    }
-    #cliForm {
-      display: flex;
-      align-items: center;
-      margin-top: 1rem;
-    }
-    #cliForm span {
-      margin-right: 0.5em;
-      color: #fff;
-    }
     #cliInput {
-      flex: 1;
-      background: transparent;
-      border: none;
+  flex: 1;
+  background: #181f1f;
+  border: 1.5px solid #00ff99;
+  color: #00ff99;
+  font-family: 'Fira Code', monospace;
+  font-size: 1em;
+  outline: none;
+  border-radius: 4px;
+  padding: 0.2em 0.5em;
+  transition: border 0.2s;
+}
+#cliInput:focus {
+  border: 1.5px solid #00ff99;
+  background: #101818;
+}
+    /* MOTD and status bar styles */
+    .cli-motd {
+      background: #181f1f;
       color: #00ff99;
+      border-radius: 8px 8px 0 0;
+      padding: 0.7rem 1rem 0.7rem 1rem;
       font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+      border-bottom: 1px solid #00ff99;
+      text-align: left;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .cli-statusbar {
+      background: #101818;
+      color: #00ff99;
+      border-radius: 0 0 8px 8px;
+      padding: 0.4rem 1rem 0.4rem 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.98rem;
+      border-bottom: 1px solid #00ff99;
+      border-top: none;
+      margin-bottom: 0.5rem;
+      text-align: right;
+      opacity: 0.85;
+    }
+    .cli-clock {
+      color: #00ff99;
+      opacity: 0.9;
       font-size: 1em;
-      outline: none;
+      font-family: inherit;
     }
     @media (max-width: 600px) {
-      .cli-box {
-        padding: 0.5rem;
-      }
-      #cliForm span {
-        font-size: 0.9em;
-      }
-      #cliInput {
-        font-size: 0.9em;
-      }
+      .cli-motd { font-size: 0.95em; padding: 0.5rem 0.5rem; }
+      .cli-statusbar { font-size: 0.93em; padding: 0.3rem 0.5rem; }
+      .cli-clock { font-size: 0.93em; }
     }
+    #hireBanner {
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+#hireBanner:hover, #hireBanner:focus {
+  background: #0f0f0f;
+  color: #00ff99;
+  outline: 2px solid #00ff99;
+}
   </style>
 </head>
 <body>
+  <div class="bg-overlay"></div>
   <header>
     <h1>Curt Hayman, CEH | Penetration Tester</h1>
-    <div id="hireBanner">I'm currently available for hire</div>
+    <div id="hireBanner" onclick="openContactModal()" tabindex="0" role="button" aria-label="Contact Me (Available for projects)">I'm currently available for projects</div>
   </header>
 
-  <button class="toggle-btn" onclick="toggleView()">Toggle Terminal View</button>
+  <button class="contact-btn" onclick="openContactModal()">Contact Me</button>
+
+  <div class="contact-modal" id="contactModal">
+    <div class="contact-modal-content">
+      <button class="contact-modal-close" onclick="closeContactModal()" aria-label="Close">&times;</button>
+      <h2>Contact Curt Hayman</h2>
+      <p>
+        <strong>Email:</strong>
+        <a href="mailto:hello@iamcurthayman.com">hello@iamcurthayman.com</a>
+      </p>
+      <p>
+        <strong>Phone:</strong>
+        <a href="tel:+14107251287">(410) 725-1287</a>
+      </p>
+    </div>
+  </div>
 
   <section id="bio-section">
     <div class="terminal-section">
       <div class="terminal-line">I am a seasoned professional in the realm of cybersecurity...</div>
       <div class="terminal-line">I also have been flying drones lately — check out my profile on <a href="https://droners.com/curtthecoder" target="_blank">Droners</a>!</div>
       <div class="terminal-line">My expertise extends beyond the cyber realm. With over 15 years of WordPress Administration mastery...</div>
-      <div class="terminal-line">Outside of work, I’m a dedicated family man... <a href="https://www.facebook.com/groups/undergroundhiphoponly" target="_blank">38K members</a> strong!</div>
+      <div class="terminal-line">Outside of work, I’m a dedicated family man. I have 38K members strong! on my <a href="https://www.facebook.com/groups/undergroundhiphoponly" target="_blank">Underground Hip Hop ONLY Facebook Group</a> </div>
       <div class="terminal-line">Oh — and I’m a lifelong <strong>Sneaker Head</strong> 👟.</div>
       <div class="terminal-line">I am also the President of <a href="https://haytreewebservices.com" target="_blank">HayTree Web Services</a>.</div>
     </div>
+  </section>
+
+  <!-- Projects/Blog Section -->
+  <section class="projects-section">
+    <h3>Recent Projects from GitHub</h3>
+    <ul class="projects-list" id="githubProjects">
+      <li>Loading projects...</li>
+    </ul>
   </section>
 
   <section>
@@ -347,13 +539,18 @@
   </div>
 
   <section class="cli-box" id="cliBox">
+    <div class="cli-motd" id="cliMotd">
+      <span id="motdText"></span>
+    </div>
+    <div class="cli-statusbar" id="cliStatusbar">
+      <span class="cli-clock" id="cliClock"></span>
+    </div>
     <div id="cliOutput"></div>
     <form id="cliForm" autocomplete="off">
       <span>curt@portfolio:~$</span>
       <input id="cliInput" type="text" />
     </form>
   </section>
-
   <section class="system-info" id="systemInfo">
     <h3>🧠 Visitor System Info</h3>
     <p><strong>User Agent:</strong> <span id="ua"></span></p>
@@ -361,37 +558,105 @@
   </section>
 
   <footer>
-    <p>Deploy this site via <code>vercel --prod</code> | Source on <a href="https://github.com/yourusername/yourrepo" target="_blank">GitHub</a></p>
+    <p>Created and Secured By <code>Curt --Hayman</code> | Find me on <a href="https://github.com/curthayman?tab=repositories" target="_blank">GitHub</a></p>
   </footer>
 
   <script>
-    function toggleView() {
-      const bio = document.getElementById('bio-section');
-      bio.classList.toggle('clean-view');
+    // Contact Modal Logic
+    function openContactModal() {
+      document.getElementById('contactModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeContactModal() {
+      document.getElementById('contactModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    // Close modal on ESC or click outside
+    window.addEventListener('keydown', function(e) {
+      if (e.key === "Escape") closeContactModal();
+    });
+    document.getElementById('contactModal').addEventListener('click', function(e) {
+      if (e.target === this) closeContactModal();
+    });
+
+    // Easter egg fortunes
+    const fortunes = [
+      "The quieter you become, the more you are able to hear.",
+      "Hack the planet!",
+      "Try 'sudo make me a sandwich' 😉",
+      "Security is a process, not a product.",
+      "You are root... in your own life.",
+      "There is no patch for human stupidity.",
+      "The best way to predict the future is to invent it."
+    ];
+
+    // Matrix animation
+    function matrixEffect() {
+      let interval;
+      const chars = "abcdefghijklmnopqrstuvwxyz0123456789#$%&@";
+      let running = true;
+      printLine("Matrix mode activated. Press ENTER to exit.");
+      function randomLine() {
+        let line = "";
+        for (let i = 0; i < 60; i++) {
+          line += chars[Math.floor(Math.random() * chars.length)];
+        }
+        printLine(`<span style="color:#00ff00;">${line}</span>`, true);
+      }
+      interval = setInterval(randomLine, 80);
+      cliInput.disabled = false;
+      cliInput.value = "";
+      cliInput.focus();
+      cliForm.onsubmit = function(e) {
+        e.preventDefault();
+        if (running) {
+          clearInterval(interval);
+          printLine("Matrix mode exited.");
+          running = false;
+          cliForm.onsubmit = cliSubmitHandler;
+        }
+        cliInput.value = "";
+      };
     }
 
-    function scrollCerts(amount) {
-      const container = document.getElementById('certScroll');
-      container.scrollLeft += amount;
+    // Uptime widget
+    let pageLoadTime = Date.now();
+    function getUptime() {
+      const now = Date.now();
+      let diff = Math.floor((now - pageLoadTime) / 1000);
+      const hours = Math.floor(diff / 3600);
+      diff %= 3600;
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+      return `${hours}h ${minutes}m ${seconds}s`;
     }
 
-    function expandImage(src) {
-      const modal = document.getElementById('certModal');
-      const modalImg = document.getElementById('modalImage');
-      modal.style.display = "block";
-      modalImg.src = src;
+    // Real-Time Clock for CLI Statusbar
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString();
+      const uptime = getUptime();
+      document.getElementById('cliClock').textContent = `🕒 ${timeStr} | Uptime: ${uptime}`;
+    }
+    setInterval(updateClock, 1000);
+
+    // Fake MOTD Banner
+    function setMotd() {
+      const now = new Date();
+      // Fake last login: yesterday at a random time, from a random city
+      const cities = ["Baltimore, MD", "New York, NY", "London, UK", "San Francisco, CA", "Berlin, DE", "Tokyo, JP"];
+      const city = cities[Math.floor(Math.random() * cities.length)];
+      const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      yesterday.setHours(Math.floor(Math.random() * 24));
+      yesterday.setMinutes(Math.floor(Math.random() * 60));
+      yesterday.setSeconds(Math.floor(Math.random() * 60));
+      const lastLogin = yesterday.toLocaleString();
+      document.getElementById('motdText').innerHTML =
+        `<span style="color:#00ff99;">Welcome, Curt. Last login: ${lastLogin} from ${city}</span>`;
+      updateClock();
     }
 
-    function closeModal() {
-      document.getElementById('certModal').style.display = "none";
-    }
-
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert("✅ Command copied to clipboard!");
-      });
-    }
-
+    // Typewriter effect for favorite commands only
     function startTyping() {
       const commands = [
         "top -l 1 | head -n 10 | grep PhysMem | sed 's/, /\\n /g'",
@@ -434,7 +699,7 @@
     const cliInput = document.getElementById('cliInput');
 
     const commands = {
-      help: "Available commands: :help, about, clear, certs, social, exit",
+      help: "Available commands: :help, about, clear, certs, social, exit, uptime, fortune, matrix, sudo make me a sandwich",
       about: "Curt Hayman, CEH | Penetration Tester. 15+ years WordPress, drone pilot, sneakerhead.",
       certs: "CEH, Digital Forensics, Bug Bounty, Master Ethical Hacker, Master Wifi Hacking, Wireshark.",
       social: "Droners: <a href='https://droners.com/curtthecoder' target='_blank'>Profile</a> | Facebook: <a href='https://www.facebook.com/groups/undergroundhiphoponly' target='_blank'>38K members</a>",
@@ -452,28 +717,84 @@
       cliOutput.scrollTop = cliOutput.scrollHeight;
     }
 
-    cliForm.onsubmit = function(e) {
+    function cliSubmitHandler(e) {
       e.preventDefault();
       const cmd = cliInput.value.trim();
       printLine(`<span style="color:#fff;">curt@portfolio:~$</span> ${cmd}`, true);
+
       if (cmd === ":help" || cmd === "help") printLine(commands.help);
       else if (cmd === "about") printLine(commands.about);
       else if (cmd === "certs") printLine(commands.certs);
       else if (cmd === "social") printLine(commands.social, true);
-      else if (cmd === "clear") cliOutput.innerHTML ="";
-      else if (cmd === "exit") { printLine(commands.exit); cliInput.disabled = true; }
+      else if (cmd === "clear") cliOutput.innerHTML = "";
+      else if (cmd=== "exit") { printLine(commands.exit); cliInput.disabled = true; }
+      else if (cmd === "uptime") printLine("Uptime: " + getUptime());
+      else if (cmd === "fortune") printLine(fortunes[Math.floor(Math.random() * fortunes.length)]);
+      else if (cmd === "sudo make me a sandwich") printLine("Okay. 🥪 (You're the boss!)");
+      else if (cmd === "matrix") matrixEffect();
       else if (cmd) printLine("Command not found. Type :help for options.");
+
       cliInput.value = "";
-    };
+    }
+
+    cliForm.onsubmit = cliSubmitHandler;
 
     printLine("Welcome to curt@terminal");
     printLine("Type :help for commands.");
-    cliInput.focus();
 
+    // Fetch recent GitHub projects
+    function fetchGitHubProjects() {
+      const username = "curthayman";
+      const projectsList = document.getElementById('githubProjects');
+      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=5`)
+        .then(response => response.json())
+        .then(repos => {
+          projectsList.innerHTML = "";
+          repos.slice(0, 5).forEach(repo => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>
+              <span class="desc">${repo.description ? repo.description : ''}</span>`;
+            projectsList.appendChild(li);
+          });
+          if (repos.length === 0) {
+            projectsList.innerHTML = "<li>No public projects found.</li>";
+          }
+        })
+        .catch(() => {
+          projectsList.innerHTML = "<li>Could not load projects from GitHub.</li>";
+        });
+    }
+
+    // Modal for cert images
+    function expandImage(src) {
+      const modal = document.getElementById('certModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = "block";
+      modalImg.src = src;
+    }
+    function closeModal() {
+      document.getElementById('certModal').style.display = "none";
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ Command copied to clipboard!");
+      });
+    }
+
+    function scrollCerts(amount) {
+      const container = document.getElementById('certScroll');
+      container.scrollLeft += amount;
+    }
+
+    // Initialize everything on load
     window.onload = () => {
+      window.scrollTo(0, 0);
+      setMotd();
       startTyping();
       displaySystemInfo();
-      cliInput.focus();
+      fetchGitHubProjects();
+      // cliInput.focus(); // intentionally not focusing to prevent scroll
     };
   </script>
 </body>
