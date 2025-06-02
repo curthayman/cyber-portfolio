@@ -435,6 +435,94 @@
   color: #00ff99;
   outline: 2px solid #00ff99;
 }
+    .skills-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+.skills-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7em;
+  margin-top: 1em;
+}
+.skill-badge {
+  background: #101818;
+  color: #00ff99;
+  border: 1.5px solid #00ff99;
+  border-radius: 6px;
+  padding: 0.4em 1em;
+  font-family: 'Fira Code', monospace;
+  font-size: 1em;
+  margin-bottom: 0.3em;
+  transition: background 0.2s, color 0.2s;
+  user-select: none;
+}
+.skill-badge:hover {
+  background: #00ff99;
+  color: #101818;
+  cursor: pointer;
+}
+    .vuln-policy-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+.vuln-policy-box {
+  background: #181f1f;
+  color: #00ff99;
+  border-left: 4px solid #00ff99;
+  border-radius: 8px;
+  padding: 1em 1.5em;
+  font-family: 'Fira Code', monospace;
+  font-size: 1em;
+  margin-top: 1em;
+}
+.vuln-policy-box a {
+  color: #00ff99;
+  border-bottom: 1px solid #00ff99;
+}
+.vuln-policy-box a:hover {
+  background: #00ff99;
+  color: #181f1f;
+}
+.vuln-policy-box ul {
+  margin: 0.7em 0 0 1.2em;
+  padding: 0;
+  color: #b0ffcc;
+  font-size: 0.97em;
+}
+    .testimonials-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+.testimonials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.testimonial {
+  background: #181f1f;
+  color: #00ff99;
+  border-left: 4px solid #00ff99;
+  border-radius: 8px;
+  padding: 1em 1.5em;
+  font-family: 'Fira Code', monospace;
+  font-size: 1em;
+  position: relative;
+}
+.testimonial p {
+  margin: 0 0 0.7em 0;
+  font-style: italic;
+  line-height: 1.5;
+}
+.testimonial-author {
+  color: #b0ffcc;
+  font-size: 0.97em;
+  font-style: normal;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
@@ -472,6 +560,23 @@
     </div>
   </section>
 
+  <section class="skills-section">
+  <h3>Skills & Tech Stack</h3>
+  <div class="skills-badges">
+    <span class="skill-badge">Python</span>
+    <span class="skill-badge">Bash</span>
+    <span class="skill-badge">Linux</span>
+    <span class="skill-badge">Kali Linux</span>
+    <span class="skill-badge">Burp Suite</span>
+    <span class="skill-badge">Wireshark</span>
+    <span class="skill-badge">Metasploit</span>
+    <span class="skill-badge">Nmap</span>
+    <span class="skill-badge">WordPress Security</span>
+    <span class="skill-badge">Digital Forensics</span>
+    <span class="skill-badge">Drone Operations</span>
+    <!-- Add or remove as you wish -->
+  </div>
+</section>
   <!-- Projects/Blog Section -->
   <section class="projects-section">
     <h3>Recent Projects from GitHub</h3>
@@ -507,7 +612,27 @@
       <button class="scroll-btn" onclick="scrollCerts(300)">&#8594;</button>
     </div>
   </section>
-
+<section class="testimonials-section">
+  <h3>Testimonials</h3>
+  <div class="testimonials-list">
+    <div class="testimonial">
+      <p>
+        “Curt consistently demonstrated professionalism, technical expertise, and a commitment to keeping our clients’ websites secure and running smoothly. His attention to detail and proactive approach ensured smooth operations for our digital platforms.”
+      </p>
+      <div class="testimonial-author">
+        — Jeff Theis, Director of Project Management, <a href="https://215marketing.com/" target="_blank"> 215 Marketing</a>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>
+        “Curt was knowledgeable about what my site needed and how to keep it performing at its best without outside interferences. Thank you <a href="https://haytreewebservices.com" target="_blank">HayTree Web Services.</a>”
+      </p>
+      <div class="testimonial-author">
+        — Mark Wilson, Bonner Private Security Firm
+      </div>
+    </div>
+  </div>
+</section>
   <div id="certModal" class="modal">
     <span class="modal-close" onclick="closeModal()">&times;</span>
     <img class="modal-content" id="modalImage">
@@ -556,7 +681,20 @@
     <p><strong>User Agent:</strong> <span id="ua"></span></p>
     <p><strong>Platform:</strong> <span id="platform"></span></p>
   </section>
-
+<section class="vuln-policy-section">
+  <h3>Vulnerability Disclosure Policy</h3>
+  <div class="vuln-policy-box">
+    <p>
+      I take security seriously. If you discover a vulnerability or security issue related to any of my projects or services, please report it responsibly.<br>
+      <strong>Contact:</strong> <a href="mailto:hello@iamcurthayman.com">hello@iamcurthayman.com</a>
+    </p>
+    <ul>
+      <li>Do not publicly disclose the issue before I have a chance to address it.</li>
+      <li>Provide as much detail as possible for efficient triage and resolution.</li>
+      <li>Responsible disclosures are appreciated and will be acknowledged.</li>
+    </ul>
+  </div>
+</section>
   <footer>
     <p>Created and Secured By <code>Curt --Hayman</code> | Find me on <a href="https://github.com/curthayman?tab=repositories" target="_blank">GitHub</a></p>
   </footer>
