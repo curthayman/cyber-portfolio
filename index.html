@@ -624,12 +624,76 @@
   margin-bottom: 0.3em;
   white-space: pre-line;
 }
+#bootLoader {
+  position: fixed;
+  z-index: 100000;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: #0f0f0f;
+  color: #00ff99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.7s;
+}
+.boot-loader-content {
+  text-align: left;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.1em;
+  background: #181f1f;
+  border: 2px solid #00ff99;
+  border-radius: 10px;
+  padding: 2em 2.5em;
+  box-shadow: 0 0 24px #00ff9955;
+}
+.boot-green { color: #00ff99; }
+.boot-loader-bar {
+  width: 100%;
+  height: 8px;
+  background: #222;
+  border-radius: 4px;
+  margin-top: 1.2em;
+  overflow: hidden;
+}
+.boot-loader-progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #00ff99 60%, #00ffcc 100%);
+  transition: width 0.5s;
+}
+#bootLoader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+    @keyframes glitch {
+  0% { text-shadow: 2px 0 #00ff99, -2px 0 #ff00cc; }
+  20% { text-shadow: -2px 0 #00ff99, 2px 0 #ff00cc; }
+  40% { text-shadow: 2px 2px #00ff99, -2px -2px #ff00cc; }
+  60% { text-shadow: -2px 2px #00ff99, 2px -2px #ff00cc; }
+  80% { text-shadow: 2px 0 #00ff99, -2px 0 #ff00cc; }
+  100% { text-shadow: none; }
+}
+.glitching {
+  animation: glitch 0.5s linear 2;
+  color: #00ff99;
+  letter-spacing: 0.04em;
+}
   </style>
 </head>
+<div id="bootLoader">
+  <div class="boot-loader-content">
+    <pre id="bootMessages"></pre>
+    <div class="boot-loader-bar">
+      <div class="boot-loader-progress"></div>
+    </div>
+  </div>
+</div>
 <body>
   <div class="bg-overlay"></div>
   <header>
-    <h1>Curt Hayman, CEH | Penetration Tester</h1>
+    <h1>
+  Curt Hayman, CEH | <span id="glitchTitle">Penetration Tester</span>
+</h1>
     <div id="hireBanner" onclick="openContactModal()" tabindex="0" role="button" aria-label="Contact Me (Available for projects)">I'm currently available for projects</div>
   </header>
 
@@ -655,7 +719,7 @@
       <div class="terminal-line">I am a seasoned professional in the realm of cybersecurity...</div>
       <div class="terminal-line">I also have been flying drones lately — check out my profile on <a href="https://droners.com/curtthecoder" target="_blank">Droners</a>!</div>
       <div class="terminal-line">My expertise extends beyond the cyber realm. With over 15 years of WordPress Administration mastery...</div>
-      <div class="terminal-line">Outside of work, I’m a dedicated family man. Love chillin with my <a href="https://www.instagram.com/iamangiehayman" target="_blank">Wifey.</a> I have 39K members strong! on my <a href="https://www.facebook.com/groups/undergroundhiphoponly" target="_blank">Underground Hip Hop ONLY Facebook Group</a> </div>
+      <div class="terminal-line">Outside of work, I’m a dedicated family man. Love chillin with my <a href="https://www.instagram.com/iamangiehayman" target="_blank">Wifey</a>. I have 39K members strong! on my <a href="https://www.facebook.com/groups/undergroundhiphoponly" target="_blank">Underground Hip Hop ONLY Facebook Group</a> </div>
       <div class="terminal-line">Oh — and I’m a lifelong <strong>Sneaker Head</strong> 👟.</div>
       <div class="terminal-line">I am also the President of <a href="https://haytreewebservices.com" target="_blank">HayTree Web Services</a>.</div>
     </div>
@@ -708,32 +772,32 @@
   </section>
 
   <section>
-    <h3>Certifications</h3>
-    <div class="cert-section-wrapper">
-      <button class="scroll-btn" onclick="scrollCerts(-300)">&#8592;</button>
-      <div class="badges-wrapper" id="certScroll">
-        <div class="badge" onclick="expandImage('certificateech.png')" title="Issued: July 16, 2023\nExpires: July 15, 2026">
-          <img src="certificateech.png" alt="CEH Certificate" class="cert-img" />
-        </div>
-        <div class="badge" onclick="expandImage('dfecertificate.png')" title="Issued: Jan 1, 2024">
-          <img src="dfecertificate.png" alt="Digital Forensics Certificate" class="cert-img" />
-        </div>
-        <div class="badge" onclick="expandImage('bugbountyhunting.png')" title="Issued: Jan 10, 2024">
-          <img src="bugbountyhunting.png" alt="Bug Bounty Certificate" class="cert-img" />
-        </div>
-        <div class="badge" onclick="expandImage('masterethicalhacker.png')" title="Issued: Feb 26, 2024">
-          <img src="masterethicalhacker.png" alt="Master Ethical Hacker Certificate" class="cert-img" />
-        </div>
-        <div class="badge" onclick="expandImage('masterwifihacking.png')" title="Issued: Feb 28, 2024">
-          <img src="masterwifihacking.png" alt="Master Wifi Hacking Certificate" class="cert-img" />
-        </div>
-        <div class="badge" onclick="expandImage('wireshark-certificate.jpeg')" title="Issued: Oct 8, 2023\nExpires: Oct 7, 2026">
-        <img src="wireshark-certificate.jpeg" alt="WireShark Certificate" class="cert-img" />
-        </div>
+  <h3>Certifications</h3>
+  <div class="cert-section-wrapper">
+    <button class="scroll-btn" onclick="scrollCerts(-300)">&#8592;</button>
+    <div class="badges-wrapper" id="certScroll">
+      <div class="badge" onclick="expandImage('certificateech.png')" title="Issued: July 16, 2023\nExpires: July 15, 2026">
+        <img src="certificateech.png" alt="CEH Certificate" class="cert-img" loading="lazy" />
       </div>
-      <button class="scroll-btn" onclick="scrollCerts(300)">&#8594;</button>
+      <div class="badge" onclick="expandImage('dfecertificate.png')" title="Issued: Jan 1, 2024">
+        <img src="dfecertificate.png" alt="Digital Forensics Certificate" class="cert-img" loading="lazy" />
+      </div>
+      <div class="badge" onclick="expandImage('bugbountyhunting.png')" title="Issued: Jan 10, 2024">
+        <img src="bugbountyhunting.png" alt="Bug Bounty Certificate" class="cert-img" loading="lazy" />
+      </div>
+      <div class="badge" onclick="expandImage('masterethicalhacker.png')" title="Issued: Feb 26, 2024">
+        <img src="masterethicalhacker.png" alt="Master Ethical Hacker Certificate" class="cert-img" loading="lazy" />
+      </div>
+      <div class="badge" onclick="expandImage('masterwifihacking.png')" title="Issued: Feb 28, 2024">
+        <img src="masterwifihacking.png" alt="Master Wifi Hacking Certificate" class="cert-img" loading="lazy" />
+      </div>
+      <div class="badge" onclick="expandImage('wireshark-certificate.jpeg')" title="Issued: Oct 8, 2023\nExpires: Oct 7, 2026">
+        <img src="wireshark-certificate.jpeg" alt="WireShark Certificate" class="cert-img" loading="lazy" />
+      </div>
     </div>
-  </section>
+    <button class="scroll-btn" onclick="scrollCerts(300)">&#8594;</button>
+  </div>
+</section>
 <section class="testimonials-section">
   <h3>Testimonials</h3>
   <div class="testimonials-list">
@@ -1185,6 +1249,100 @@ function addSecurityFeedLine() {
       setInterval(addSecurityFeedLine, 2200);
       // cliInput.focus(); // intentionally not focusing to prevent scroll
     };
+// Advanced Boot Loader with Typewriter, Random Messages, and "show once" logic
+window.addEventListener('DOMContentLoaded', function() {
+  // Check if user has already seen the boot loader
+  if (localStorage.getItem('bootLoaderShown')) {
+    document.getElementById('bootLoader').style.display = 'none';
+    return;
+  }
+
+  const bootMessages = [
+    '<span class="boot-green">[BOOT]</span> Initializing system...',
+    '<span class="boot-green">[OK]</span> Loading modules...',
+    '<span class="boot-green">[OK]</span> Establishing secure connection...',
+    '<span class="boot-green">[OK]</span> Authenticating user...',
+    '<span class="boot-green">[OK]</span> Mounting encrypted volumes...',
+    '<span class="boot-green">[OK]</span> Checking for rootkits...',
+    '<span class="boot-green">[OK]</span> Starting IDS/IPS...',
+    '<span class="boot-green">[OK]</span> Updating threat intelligence feeds...',
+    '<span class="boot-green">[OK]</span> Verifying digital signatures...',
+    '<span class="boot-green">[OK]</span> Loading hacking tools...',
+    '<span class="boot-green">[OK]</span> Welcome, Curt. System ready.'
+  ];
+
+  // Pick 5 random (non-boot, non-final) messages for variety
+  const alwaysFirst = bootMessages[0];
+  const alwaysLast = bootMessages[bootMessages.length - 1];
+  const middle = bootMessages.slice(1, -1);
+  const shuffled = middle.sort(() => 0.5 - Math.random()).slice(0, 4);
+  const sequence = [alwaysFirst, ...shuffled, alwaysLast];
+
+  const pre = document.getElementById('bootMessages');
+  const progress = document.querySelector('.boot-loader-progress');
+  const loader = document.getElementById('bootLoader');
+
+  let msgIdx = 0;
+  let charIdx = 0;
+  let currentLine = '';
+  let lines = [];
+
+  function typeNextChar() {
+    if (msgIdx >= sequence.length) {
+      // Done! Fill progress bar and fade out
+      progress.style.width = '100%';
+      setTimeout(() => {
+        loader.classList.add('hide');
+        setTimeout(() => loader.style.display = 'none', 700);
+        // Set flag so boot loader doesn't show again
+        localStorage.setItem('bootLoaderShown', '1');
+      }, 700);
+      return;
+    }
+    const msg = sequence[msgIdx];
+    if (charIdx < msg.length) {
+      currentLine += msg[charIdx];
+      pre.innerHTML = lines.concat(currentLine).join('\n');
+      charIdx++;
+      setTimeout(typeNextChar, 18 + Math.random() * 30); // randomize typing speed
+    } else {
+      lines.push(currentLine);
+      currentLine = '';
+      charIdx = 0;
+      // Update progress bar
+      progress.style.width = ((msgIdx + 1) / sequence.length * 100) + '%';
+      msgIdx++;
+      setTimeout(typeNextChar, 250 + Math.random() * 200); // pause between lines
+    }
+  }
+
+  typeNextChar();
+});
+ // Glitch Title Effect (cycles through all titles, never resets)
+(function() {
+  const titles = [
+    "Cyber Security Analyst",
+    "WordPress Administrator",
+    "Ethical Hacker",
+    "Penetration Tester",
+    "B-Boy"
+  ];
+  const glitchSpan = document.getElementById('glitchTitle');
+  let lastIdx = titles.indexOf(glitchSpan.textContent.trim());
+  function glitchTitle() {
+    let idx;
+    do {
+      idx = Math.floor(Math.random() * titles.length);
+    } while (idx === lastIdx);
+    lastIdx = idx;
+    glitchSpan.textContent = titles[idx];
+    glitchSpan.classList.add('glitching');
+    setTimeout(() => {
+      glitchSpan.classList.remove('glitching');
+    }, 1200);
+  }
+  setInterval(glitchTitle, 3400); // Glitch every 3.4 seconds
+})();
 </script>
 </body>
 </html>
