@@ -9,6 +9,7 @@ Welcome to my personal cyber security portfolio site! This project showcases my 
 - **Back to Top Button:** Neon-styled, animated button appears when scrolling, with a glitch effect on hover.
 - **Responsive Design:** Looks great on desktop and mobile devices.
 - **Modern Aesthetic:** Cyberpunk/neon color palette, custom SVG icons, and smooth transitions.
+- **And More!**
 
 ## 🛠️ Technologies Used
 
