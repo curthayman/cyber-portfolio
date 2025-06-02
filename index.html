@@ -678,7 +678,53 @@
   color: #00ff99;
   letter-spacing: 0.04em;
 }
-  </style>
+    #backToTopBtn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 10010;
+  background: #101818cc;
+  border: 2px solid #00ff99;
+  border-radius: 50%;
+  padding: 0.7em;
+  box-shadow: 0 2px 12px #00ff9940;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, background 0.2s, border 0.2s, transform 0.2s;
+  outline: none;
+}
+#backToTopBtn svg {
+  display: block;
+}
+#backToTopBtn:hover, #backToTopBtn:focus {
+  background: #00ff99;
+  border-color: #00ff99;
+  transform: scale(1.08);
+}
+#backToTopBtn:hover svg path, #backToTopBtn:focus svg path {
+  stroke: #101818;
+}
+#backToTopBtn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+@keyframes btn-flicker {
+  0%, 100% { box-shadow: 0 2px 12px #00ff9940; }
+  10% { box-shadow: 0 0 24px #00ff99; }
+  20% { box-shadow: 0 2px 12px #00ff9940; }
+  30% { box-shadow: 0 0 16px #00ff99; }
+  50% { box-shadow: 0 2px 12px #00ff9940; }
+  70% { box-shadow: 0 0 20px #00ff99; }
+  90% { box-shadow: 0 2px 12px #00ff9940; }
+}
+#backToTopBtn:hover, #backToTopBtn:focus {
+  animation: btn-flicker 0.7s linear 1;
+}
+    #backToTopBtn:hover svg, #backToTopBtn:focus svg {
+  animation: btn-glitch 0.5s linear 2;
+}
+</style>
 </head>
 <div id="bootLoader">
   <div class="boot-loader-content">
@@ -928,7 +974,11 @@
   </p>
     <!-- FLAG: curt{h4ck3d-th3-p0rtf0li0} -->
 </footer>
-
+<button id="backToTopBtn" title="Back to top">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+    <path d="M12 19V5M12 5L5 12M12 5l7 7" stroke="#00ff99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
  <script>
     // Contact Modal Logic
     function openContactModal() {
@@ -1268,7 +1318,7 @@ window.addEventListener('DOMContentLoaded', function() {
     '<span class="boot-green">[OK]</span> Updating threat intelligence feeds...',
     '<span class="boot-green">[OK]</span> Verifying digital signatures...',
     '<span class="boot-green">[OK]</span> Loading hacking tools...',
-    '<span class="boot-green">[OK]</span> Welcome, Curt. System ready.'
+    '<span class="boot-green">[OK]</span> Welcome, Visitor. System ready.'
   ];
 
   // Pick 5 random (non-boot, non-final) messages for variety
@@ -1342,6 +1392,20 @@ window.addEventListener('DOMContentLoaded', function() {
     }, 1200);
   }
   setInterval(glitchTitle, 3400); // Glitch every 3.4 seconds
+})();
+   // Back to Top Button
+(function() {
+  const btn = document.getElementById('backToTopBtn');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 200) {
+      btn.classList.add('show');
+    } else {
+      btn.classList.remove('show');
+    }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 })();
 </script>
 </body>
