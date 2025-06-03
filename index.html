@@ -724,6 +724,16 @@
     #backToTopBtn:hover svg, #backToTopBtn:focus svg {
   animation: btn-glitch 0.5s linear 2;
 }
+    .visitor-privacy-note {
+  color: #00ff99 !important;
+  background: #222 !important;
+  padding: 2px 6px !important;
+}
+    .privacy-glitching {
+  animation: glitch 0.5s linear 2;
+  color: #00ff99;
+  letter-spacing: 0.04em;
+}
 </style>
 </head>
 <div id="bootLoader">
@@ -738,7 +748,7 @@
   <div class="bg-overlay"></div>
   <header>
     <h1>
-  Curt Hayman, CEH | <span id="glitchTitle">Penetration Tester</span>
+  Curt Hayman,CEH | <span id="glitchTitle">Penetration Tester</span>
 </h1>
     <div id="hireBanner" onclick="openContactModal()" tabindex="0" role="button" aria-label="Contact Me (Available for projects)">I'm currently available for projects</div>
   </header>
@@ -748,7 +758,7 @@
   <div class="contact-modal" id="contactModal">
     <div class="contact-modal-content">
       <button class="contact-modal-close" onclick="closeContactModal()" aria-label="Close">&times;</button>
-      <h2>Contact Curt Hayman</h2>
+      <h2>Contact Curt Hayman,CEH</h2>
       <p>
         <strong>Email:</strong>
         <a href="mailto:hello@iamcurthayman.com">hello@iamcurthayman.com</a>
@@ -762,10 +772,12 @@
 
   <section id="bio-section">
     <div class="terminal-section">
-      <div class="terminal-line">I am a seasoned professional in the realm of cybersecurity...</div>
+      <div class="terminal-line">I am a seasoned professional in the realm of cybersecurity... 6+ years.</div>
       <div class="terminal-line">I also have been flying drones lately — check out my profile on <a href="https://droners.com/curtthecoder" target="_blank">Droners</a>!</div>
       <div class="terminal-line">My expertise extends beyond the cyber realm. With over 15 years of WordPress Administration mastery...</div>
-      <div class="terminal-line">Outside of work, I’m a dedicated family man. Love chillin with my <a href="https://www.instagram.com/iamangiehayman" target="_blank">Wifey</a>. I have 39K members strong! on my <a href="https://www.facebook.com/groups/undergroundhiphoponly" target="_blank">Underground Hip Hop ONLY Facebook Group</a> </div>
+      <div class="terminal-line">Outside of work, I’m a dedicated family man. Love chillin with my <a href="https://www.instagram.com/iamangiehayman" target="_blank">Wifey</a>. I have 39K members strong! on my <a href="https://www.facebook.com/groups/undergroundhiphoponly" target="_blank">Underground Hip Hop ONLY Facebook Group</a>. </div>
+      <div class="terminal-line">Love plants 🪴, and gardening.</div>
+      <div class="terminal-line">It's easter egg surprises all through this site, so enjoy! Be Nosey!</div>
       <div class="terminal-line">Oh — and I’m a lifelong <strong>Sneaker Head</strong> 👟.</div>
       <div class="terminal-line">I am also the President of <a href="https://haytreewebservices.com" target="_blank">HayTree Web Services</a>.</div>
     </div>
@@ -784,7 +796,8 @@
     <span class="skill-badge">Nmap</span>
     <span class="skill-badge">WordPress Security</span>
     <span class="skill-badge">Digital Forensics</span>
-    <span class="skill-badge">Drone Operations</span>
+    <span class="skill-badge">Drone Forensics</span>
+    <span class="skill-badge">And More!!</span>
     <!-- Add or remove as you wish -->
   </div>
 </section>
@@ -871,29 +884,36 @@
   </div>
 
   <div class="commands-section">
-    <h3>My Favorite Commands</h3>
-    <div class="command-group">
-      <div class="cmd-label">Get memory statistics, run:</div>
-      <div class="command-terminal">
-        <div class="typed-line" id="line1"></div>
-        <button class="copy-btn" onclick="copyText('top -l 1 | head -n 10 | grep PhysMem | sed \"s/, /\\n /g\"')">Copy</button>
-      </div>
-    </div>
-    <div class="command-group">
-      <div class="cmd-label">Cache Flush on Mac, run:</div>
-      <div class="command-terminal">
-        <div class="typed-line" id="line2"></div>
-        <button class="copy-btn" onclick="copyText('sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed')">Copy</button>
-      </div>
-    </div>
-    <div class="command-group">
-      <div class="cmd-label">Find Vulnerable Ports, run:</div>
-      <div class="command-terminal">
-        <div class="typed-line" id="line3"></div>
-        <button class="copy-btn" onclick="copyText('sudo nmap -sV --script=vuln targetip')">Copy</button>
-      </div>
+  <h3>My Favorite Commands</h3>
+  <div class="command-group">
+    <div class="cmd-label">Get memory statistics, run:</div>
+    <div class="command-terminal">
+      <div class="typed-line" id="line1"></div>
+      <button class="copy-btn" onclick="copyTypedLine('line1')">Copy</button>
     </div>
   </div>
+  <div class="command-group">
+    <div class="cmd-label">Cache Flush on Mac, run:</div>
+    <div class="command-terminal">
+      <div class="typed-line" id="line2"></div>
+      <button class="copy-btn" onclick="copyTypedLine('line2')">Copy</button>
+    </div>
+  </div>
+  <div class="command-group">
+    <div class="cmd-label">Find Vulnerable Ports, run:</div>
+    <div class="command-terminal">
+      <div class="typed-line" id="line3"></div>
+      <button class="copy-btn" onclick="copyTypedLine('line3')">Copy</button>
+    </div>
+  </div>
+  <div class="command-group">
+    <div class="cmd-label">Need more information on a command?</div>
+    <div class="command-terminal">
+      <div class="typed-line" id="line4"></div>
+      <button class="copy-btn" onclick="copyTypedLine('line4')">Copy</button>
+    </div>
+  </div>
+</div>
 <section class="gadgets-section">
   <h3>Favorite Hacking Toys</h3>
   <ul class="gadgets-list">
@@ -920,14 +940,17 @@
     <div id="cliOutput"></div>
     <form id="cliForm" autocomplete="off">
       <span>curt@portfolio:~$</span>
-      <input id="cliInput" type="text" />
+      <input id="cliInput" type="text" placeholder="type your command here" />
     </form>
   </section>
-  <section class="system-info" id="systemInfo">
+ <section class="system-info" id="systemInfo">
+  <div class="system-info-header">
     <h3>🧠 Visitor System Info</h3>
-    <p><strong>User Agent:</strong> <span id="ua"></span></p>
-    <p><strong>Platform:</strong> <span id="platform"></span></p>
-  </section>
+    <span class="visitor-privacy-note" id="privacyGlitch">I don’t save any of this data. I don't want your cookies 🍪 either.</span>
+  </div>
+  <p><strong>User Agent:</strong> <span id="ua"></span></p>
+  <p><strong>Platform:</strong> <span id="platform"></span></p>
+</section>
 <section class="vuln-policy-section">
   <h3>Vulnerability Disclosure Policy</h3>
   <div class="vuln-policy-box">
@@ -944,7 +967,7 @@
 </section>
   <footer>
   <p>
-    Created and Secured By <code>Curt --Hayman</code> | Find me on
+    Created and Secured By <code>Curt --Hayman,CEH</code> | Not hard to find!
     <a href="https://github.com/curthayman?tab=repositories" target="_blank" aria-label="GitHub" class="social-link">
   <svg width="22" height="22" fill="#00ff99" viewBox="0 0 24 24">
     <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 2.045.138 3.003.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
@@ -972,8 +995,24 @@
 </a>
     </span>
   </p>
-    <!-- FLAG: curt{h4ck3d-th3-p0rtf0li0} -->
+<div class="visitor-privacy-note privacy-glitching" style="margin: 1.2em auto 0 auto; max-width: 600px; text-align: center; font-size: 1.1em;">
+  This site, as coded, is 🍪 cookie-free for visitors.
+</div>
+<!-- FLAG: curt{h4ck3d-th3-p0rtf0li0} -->
 </footer>
+<script>
+  // Glitch effect for the privacy note
+  (function() {
+    const privacy = document.querySelector('.visitor-privacy-note');
+    function glitchPrivacy() {
+      privacy.classList.add('glitching');
+      setTimeout(() => {
+        privacy.classList.remove('glitching');
+      }, 800);
+    }
+    setInterval(glitchPrivacy, 3200);
+  })();
+</script>
 <button id="backToTopBtn" title="Back to top">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
     <path d="M12 19V5M12 5L5 12M12 5l7 7" stroke="#00ff99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1071,23 +1110,69 @@
       yesterday.setSeconds(Math.floor(Math.random() * 60));
       const lastLogin = yesterday.toLocaleString();
       document.getElementById('motdText').innerHTML =
-        `<span style="color:#00ff99;">Welcome, Curt. Last login: ${lastLogin} from ${city}</span>`;
+        `<span style="color:#00ff99;">Welcome, Visitor. Last login: ${lastLogin} from ${city}</span>`;
       updateClock();
     }
 
-    // Typewriter effect for favorite commands only
-    function startTyping() {
-      const commands = [
-        "top -l 1 | head -n 10 | grep PhysMem | sed 's/, /\\n /g'",
-        "sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed",
-        "sudo nmap -sV --script=vuln targetip"
-      ];
-      typeLine(commands[0], 'line1', () => {
-        typeLine(commands[1], 'line2', () => {
-          typeLine(commands[2], 'line3');
-        });
+// Typewriter effect for favorite commands only
+function startTyping() {
+  const commands = [
+    "top -l 1 | head -n 10 | grep PhysMem | sed 's/, /\\n /g'",
+    "sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed",
+    "sudo nmap -sV --script=vuln targetip",
+    "curl cheat.sh/nmap"
+  ];
+  typeLine(commands[0], 'line1', () => {
+    typeLine(commands[1], 'line2', () => {
+      typeLine(commands[2], 'line3', () => {
+        typeLine(commands[3], 'line4');
       });
+    });
+  });
+}
+
+// Helper: typewriter effect for a single line
+function typeLine(text, elementId, callback) {
+  const el = document.getElementById(elementId);
+  el.textContent = "";
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 18); // Adjust speed as desired
+    } else if (callback) {
+      callback();
     }
+  }
+  type();
+}
+
+// Enhanced copy function: changes button text and color on click
+function copyTypedLine(lineId) {
+  const text = document.getElementById(lineId).textContent;
+  navigator.clipboard.writeText(text);
+
+  // Find the button that was clicked (the one next to this line)
+  const parent = document.getElementById(lineId).parentElement;
+  const button = parent.querySelector('.copy-btn');
+  const originalText = button.textContent;
+  const originalBg = button.style.backgroundColor;
+  const originalColor = button.style.color;
+
+  // Change to "Copied" and highlight color
+  button.textContent = "Copied";
+  button.style.backgroundColor = "#00ff99"; // Neon green
+  button.style.color = "#181f1f";           // Dark text for contrast
+  button.disabled = true;
+
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.style.backgroundColor = originalBg;
+    button.style.color = originalColor;
+    button.disabled = false;
+  }, 1200); // 1.2 seconds, adjust as you like
+}
 
     function typeLine(text, elementId, callback) {
       let i = 0;
@@ -1103,14 +1188,10 @@
       }, 40);
     }
 
-    function displaySystemInfo() {
-      const sysInfo = document.getElementById('systemInfo');
-      const agent = navigator.userAgent;
-      const platform = navigator.platform;
-      sysInfo.innerHTML = `<h3>🧠 Visitor System Info</h3>
-        <p><strong>User Agent:</strong> ${agent}</p>
-        <p><strong>Platform:</strong> ${platform}</p>`;
-    }
+  function displaySystemInfo() {
+  document.getElementById('ua').textContent = navigator.userAgent;
+  document.getElementById('platform').textContent = navigator.platform;
+}
 
     // CLI Terminal Logic
     const cliOutput = document.getElementById('cliOutput');
@@ -1407,6 +1488,53 @@ window.addEventListener('DOMContentLoaded', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
+   (function() {
+  const privacy = document.getElementById('privacyGlitch');
+  function glitchPrivacy() {
+    privacy.classList.add('glitching');
+    setTimeout(() => {
+      privacy.classList.remove('glitching');
+    }, 800);
+  }
+  setInterval(glitchPrivacy, 3200); // Glitch every 3.2 seconds
+})();
+
+</script>
+<script>
+// Clean ASCII art banner
+const asciiArt = `
+######
+#     # ###### ###### #    #   ##   #####   ####   ####
+#     # #      #      #   #   #  #  #    # #    # #    #
+######  #####  #####  ####   #    # #####  #    # #    #
+#       #      #      #  #   ###### #    # #    # #    #
+#       #      #      #   #  #    # #    # #    # #    #
+#       ###### ###### #    # #    # #####   ####   ####
+`;
+
+// Tech stack badges
+const techs = [
+  { name: "HTML5", style: "background:#e44d26; color:#fff; padding:2px 8px; border-radius:4px; font-weight:bold;" },
+  { name: "CSS3", style: "background:#2965f1; color:#fff; padding:2px 8px; border-radius:4px; font-weight:bold;" },
+  { name: "JavaScript", style: "background:#f7df1e; color:#222; padding:2px 8px; border-radius:4px; font-weight:bold;" },
+  { name: "Fira Code Font", style: "background:#181f1f; color:#00ff99; padding:2px 8px; border-radius:4px; font-weight:bold;" }
+];
+
+// Print ASCII art with one style
+console.log("%c" + asciiArt, "color:#00ff99; font-family:monospace; font-size:1.1em; font-weight:bold;");
+
+// Animated typewriter for tech stack
+setTimeout(() => {
+  console.log("%c👨‍💻 Built with:", "color:#00ff99; font-size:1.3em; font-weight:bold;");
+  techs.forEach((tech, i) => {
+    setTimeout(() => {
+      console.log("%c" + tech.name, tech.style);
+    }, 400 * (i + 1));
+  });
+  setTimeout(() => {
+    console.log("%cLike what you see? Let's connect! github.com/curthayman", "color:#00ff99; font-size:1.1em; font-style:italic;");
+  }, 400 * (techs.length + 1));
+}, 600);
 </script>
 </body>
 </html>
