@@ -32,6 +32,11 @@
 <!-- Keywords -->
 <meta name="keywords" content="Curt Hayman,CEH, penetration tester, ethical hacker, cybersecurity, WordPress security, digital forensics, bug bounty, drone pilot, Baltimore, freelance, Delaware, Maryland, Website Design, Development consulting">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <style>
     body {
       margin: 0;
@@ -734,6 +739,19 @@
   color: #00ff99;
   letter-spacing: 0.04em;
 }
+
+.ip-card {
+  background: #181f1f;
+  color: #00ff99;
+  border-left: 4px solid #00ff99;
+  border-radius: 8px;
+  padding: 1em 1.5em;
+  font-family: 'Fira Code', monospace;
+  font-size: 1em;
+  margin-top: 1em;
+  box-shadow: 0 2px 8px #00ff9940;
+  max-width: 400px;
+}
 </style>
 </head>
 <div id="bootLoader">
@@ -958,7 +976,10 @@
   <p><strong>User Agent:</strong> <span id="ua"></span></p>
   <p><strong>Platform:</strong> <span id="platform"></span></p>
   <p><strong>IP Address:</strong> <span id="ip"></span></p>
-</section>
+  <p><strong>ISP Location:</strong> <span id="ip-location"></span></p>
+  <div id="ip-map" style="width:100%;height:220px;border-radius:8px;overflow:hidden;margin-top:8px;display:none;"></div>
+</div>
+ </section>
 <section class="vuln-policy-section">
   <h3>Vulnerability Disclosure Policy</h3>
   <div class="vuln-policy-box">
@@ -1212,6 +1233,72 @@ fetch('https://api.ipify.org?format=json')
     document.getElementById('ip').textContent = "Unavailable";
   });
 }
+// Fetch and display the visitor's IP address and location (no storage, just display)
+fetch('https://api.ipify.org?format=json')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('ip').textContent = data.ip;
+    fetch('https://ipapi.co/' + data.ip + '/json/')
+      .then(res => res.json())
+      .then(loc => {
+        function countryFlagEmoji(cc) {
+          if (!cc) return '';
+          return cc
+            .toUpperCase()
+            .replace(/./g, char => String.fromCodePoint(127397 + char.charCodeAt()));
+        }
+        let locationStr = '';
+        if (loc.city) locationStr += loc.city + ', ';
+        if (loc.region) locationStr += loc.region + ', ';
+        if (loc.country_name) locationStr += loc.country_name + ' ';
+        if (loc.country) locationStr += countryFlagEmoji(loc.country);
+        if (loc.org) locationStr += ' (' + loc.org + ')';
+        document.getElementById('ip-location').textContent = locationStr || "Unavailable";
+
+        // Show interactive Leaflet map if coordinates are available
+        const mapDiv = document.getElementById('ip-map');
+        mapDiv.innerHTML = '';
+        if (loc.latitude && loc.longitude) {
+          mapDiv.style.display = 'block';
+          // Remove any previous map instance
+          if (window._leafletMap) {
+            window._leafletMap.remove();
+            window._leafletMap = null;
+          }
+          // Initialize Leaflet map with dark tiles
+          window._leafletMap = L.map('ip-map').setView([loc.latitude, loc.longitude], 10);
+          L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a> | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+          }).addTo(window._leafletMap);
+
+          // Neon green marker icon
+          const neonIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+            shadowSize: [41, 41]
+          });
+
+          L.marker([loc.latitude, loc.longitude], { icon: neonIcon }).addTo(window._leafletMap)
+            .bindPopup(locationStr).openPopup();
+        } else {
+          mapDiv.style.display = 'none';
+        }
+      })
+      .catch(() => {
+        document.getElementById('ip-location').textContent = "Unavailable";
+        document.getElementById('ip-map').style.display = 'none';
+      });
+  })
+  .catch(() => {
+    document.getElementById('ip').textContent = "Unavailable";
+    document.getElementById('ip-location').textContent = "Unavailable";
+    document.getElementById('ip-map').style.display = 'none';
+  });
 
     // CLI Terminal Logic
     const cliOutput = document.getElementById('cliOutput');
