@@ -16,5 +16,5 @@ Welcome to my personal cyber security portfolio site! This project showcases my 
 - HTML5 & CSS3 (with custom animations)
 - JavaScript (vanilla, no frameworks)
 - SVG for icons and effects
-- 1742 lines.
+- 1742 lines of code
 - Fira Code Font
