@@ -1359,7 +1359,7 @@ fetch('https://api.ipify.org?format=json')
     const cliInput = document.getElementById('cliInput');
 
     const commands = {
-      help: "Available commands: :help, about, clear, certs, social, exit, uptime, fortune, matrix, sudo make me a sandwich, weather, nmap, hint, submit <flag>",
+      help: "Available commands: help, about, clear, certs, social, exit, uptime, fortune, matrix, sudo make me a sandwich, weather, nmap, hint, submit <flag>",
       about: "Curt Hayman, CEH | Penetration Tester. 15+ years WordPress 7+ years CyberSecurity, drone pilot, sneakerhead.",
       certs: "CEH, Digital Forensics, Bug Bounty, Master Ethical Hacker, Master Wifi Hacking, Wireshark.",
       social: "Droners: <a href='https://droners.com/curtthecoder' target='_blank'>Profile</a> | Facebook: <a href='https://www.facebook.com/groups/undergroundhiphoponly' target='_blank'>UGHHO</a> | Facebook: <a href='https://www.facebook.com/imcurthayman/' target='_blank'>Personal</a>",
@@ -1403,7 +1403,7 @@ else if (cmd === ":matrix") {
   }
   // --- End Easter Egg Commands ---
 
-  else if (cmd === ":help" || cmd === "help") printLine(commands.help);
+  else if (cmd === "help" || cmd === "help") printLine(commands.help);
   else if (cmd === "about") printLine(commands.about);
   else if (cmd === "certs") printLine(commands.certs);
   else if (cmd === "social") printLine(commands.social, true);
@@ -1438,7 +1438,7 @@ else if (cmd === ":matrix") {
       printLine("❌ Incorrect flag. Try again!");
     }
   }
-  else if (cmd) printLine("Command not found. Type :help for options.");
+  else if (cmd) printLine("Command not found. Type help for options.");
 
   cliInput.value = "";
 }
@@ -1446,7 +1446,7 @@ else if (cmd === ":matrix") {
     cliForm.onsubmit = cliSubmitHandler;
 
     printLine("Welcome to curt@terminal");
-    printLine("Type :help for commands.");
+    printLine("Type help for commands.");
 
     // Fetch recent GitHub projects
     function fetchGitHubProjects() {
