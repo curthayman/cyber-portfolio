@@ -813,13 +813,6 @@ function addSecurityFeedLine() {
       setInterval(addSecurityFeedLine, 2200);
       // cliInput.focus(); // intentionally not focusing to prevent scroll
     };
-// Advanced Boot Loader with Typewriter, Random Messages, and "show once" logic
-window.addEventListener('DOMContentLoaded', function() {
-  // Check if user has already seen the boot loader
-  if (localStorage.getItem('bootLoaderShown')) {
-    document.getElementById('bootLoader').style.display = 'none';
-    return;
-  }
 
   const bootMessages = [
     '<span class="boot-green">[BOOT]</span> Initializing system...',
@@ -835,53 +828,7 @@ window.addEventListener('DOMContentLoaded', function() {
     '<span class="boot-green">[OK]</span> Welcome, Visitor. System ready.'
   ];
 
-  // Pick 5 random (non-boot, non-final) messages for variety
-  const alwaysFirst = bootMessages[0];
-  const alwaysLast = bootMessages[bootMessages.length - 1];
-  const middle = bootMessages.slice(1, -1);
-  const shuffled = middle.sort(() => 0.5 - Math.random()).slice(0, 4);
-  const sequence = [alwaysFirst, ...shuffled, alwaysLast];
-
-  const pre = document.getElementById('bootMessages');
-  const progress = document.querySelector('.boot-loader-progress');
-  const loader = document.getElementById('bootLoader');
-
-  let msgIdx = 0;
-  let charIdx = 0;
-  let currentLine = '';
-  let lines = [];
-
-  function typeNextChar() {
-    if (msgIdx >= sequence.length) {
-      // Done! Fill progress bar and fade out
-      progress.style.width = '100%';
-      setTimeout(() => {
-        loader.classList.add('hide');
-        setTimeout(() => loader.style.display = 'none', 700);
-        // Set flag so boot loader doesn't show again
-        localStorage.setItem('bootLoaderShown', '1');
-      }, 700);
-      return;
-    }
-    const msg = sequence[msgIdx];
-    if (charIdx < msg.length) {
-      currentLine += msg[charIdx];
-      pre.innerHTML = lines.concat(currentLine).join('\n');
-      charIdx++;
-      setTimeout(typeNextChar, 18 + Math.random() * 30); // randomize typing speed
-    } else {
-      lines.push(currentLine);
-      currentLine = '';
-      charIdx = 0;
-      // Update progress bar
-      progress.style.width = ((msgIdx + 1) / sequence.length * 100) + '%';
-      msgIdx++;
-      setTimeout(typeNextChar, 250 + Math.random() * 200); // pause between lines
-    }
-  }
-
-  typeNextChar();
-});
+  
  // Glitch Title Effect (cycles through all titles, never resets)
 (function() {
   const titles = [
