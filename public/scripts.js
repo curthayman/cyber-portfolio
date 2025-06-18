@@ -652,3 +652,14 @@ function showAchievementBadge() {
   }
   typeMatrix();
 });
+ // Glitch effect for the privacy note
+  (function() {
+    const privacy = document.querySelector('.visitor-privacy-note');
+    function glitchPrivacy() {
+      privacy.classList.add('glitching');
+      setTimeout(() => {
+        privacy.classList.remove('glitching');
+      }, 800);
+    }
+    setInterval(glitchPrivacy, 3200);
+  })();
