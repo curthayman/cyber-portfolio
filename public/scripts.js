@@ -14,7 +14,6 @@ window.addEventListener('keydown', function(e) {
 document.getElementById('contactModal').addEventListener('click', function(e) {
   if (e.target === this) closeContactModal();
 });
-
 // Easter egg fortunes
 const fortunes = [
   "Hint: Sometimes the best secrets are hidden in plain sight (or in the source code)...",
@@ -26,7 +25,6 @@ const fortunes = [
   "There is no patch for human stupidity.",
   "The best way to predict the future is to invent it."
 ];
-
 // Matrix animation
 function matrixEffect() {
   let interval;
@@ -55,7 +53,6 @@ function matrixEffect() {
     cliInput.value = "";
   };
 }
-
 // Uptime widget
 let pageLoadTime = Date.now();
 function getUptime() {
@@ -67,7 +64,6 @@ function getUptime() {
   const seconds = diff % 60;
   return `${hours}h ${minutes}m ${seconds}s`;
 }
-
 // Real-Time Clock for CLI Statusbar
 function updateClock() {
   const now = new Date();
@@ -76,7 +72,6 @@ function updateClock() {
   document.getElementById('cliClock').textContent = `🕒 ${timeStr} | Uptime: ${uptime}`;
 }
 setInterval(updateClock, 1000);
-
 // Fake MOTD Banner
 function setMotd() {
   const now = new Date();
@@ -92,7 +87,6 @@ function setMotd() {
     `<span style="color:#00ff99;">Welcome, Visitor. Last login: ${lastLogin} from ${city}</span>`;
   updateClock();
 }
-
 // Typewriter effect for favorite commands only
 function startTyping() {
   const commands = [
@@ -112,7 +106,6 @@ function startTyping() {
     });
   });
 }
-
 // Helper: typewriter effect for a single line
 function typeLine(text, elementId, callback) {
   const el = document.getElementById(elementId);
@@ -129,7 +122,6 @@ function typeLine(text, elementId, callback) {
   }
   type();
 }
-
 // Enhanced copy function: changes button text and color on click
 function copyTypedLine(lineId) {
   const text = document.getElementById(lineId).textContent;
@@ -155,7 +147,6 @@ function copyTypedLine(lineId) {
     button.disabled = false;
   }, 1200);
 }
-
 function displaySystemInfo() {
   document.getElementById('ua').textContent = navigator.userAgent;
   document.getElementById('platform').textContent = navigator.platform;
@@ -450,56 +441,6 @@ function animateStats() {
     update();
   });
 }
-const securityEvents = [
-  "IDS initialized. Monitoring network traffic...",
-  "New SSH connection detected from 192.168.1.42",
-  "Blocked suspicious login attempt from 203.0.113.77",
-  "Firewall: Port scan detected and mitigated.",
-  "Malware signature update completed.",
-  "User 'admin' logged in from 10.0.0.5",
-  "Phishing email quarantined.",
-  "Brute force attack detected on port 22.",
-  "Vulnerability scan completed: 0 critical, 2 medium, 5 low.",
-  "Suspicious outbound traffic blocked.",
-  "SIEM: No critical alerts in the last hour.",
-  "VPN connection established from 198.51.100.23",
-  "Antivirus scan completed: No threats found.",
-  "New device connected: RaspberryPi-3B+",
-  "DDoS attempt detected and rate-limited.",
-  "User 'curt' escalated privileges to root.",
-  "Zero-day exploit attempt blocked.",
-  "Security policy updated successfully.",
-  "Log file rotated: /var/log/auth.log",
-  "All systems nominal."
-];
-
-function addSecurityFeedLine() {
-  const feed = document.getElementById('securityFeed');
-  if (!feed) return;
-  const now = new Date();
-  const time = now.toTimeString().split(' ')[0];
-  const event = securityEvents[Math.floor(Math.random() * securityEvents.length)];
-  const div = document.createElement('div');
-  div.className = 'security-feed-line';
-  div.textContent = `[${time}] ${event}`;
-  feed.appendChild(div);
-  feed.scrollTop = feed.scrollHeight;
-  // Limit to last 20 lines
-  while (feed.children.length > 20) {
-    feed.removeChild(feed.firstChild);
-  }
-}
-// Initialize everything on load
-window.onload = () => {
-  window.scrollTo(0, 0);
-  setMotd();
-  startTyping();
-  displaySystemInfo();
-  fetchGitHubProjects();
-  animateStats();
-  setInterval(addSecurityFeedLine, 2200);
-  // cliInput.focus(); // intentionally not focusing to prevent scroll
-};
 
 const bootMessages = [
   '<span class="boot-green">[BOOT]</span> Initializing system...',
@@ -541,6 +482,7 @@ const bootMessages = [
   }
   setInterval(glitchTitle, 3400); // Glitch every 3.4 seconds
 })();
+
 // Back to Top Button
 (function() {
   const btn = document.getElementById('backToTopBtn');
@@ -555,6 +497,7 @@ const bootMessages = [
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
+
 (function() {
   const privacy = document.getElementById('privacyGlitch');
   function glitchPrivacy() {
@@ -600,6 +543,7 @@ setTimeout(() => {
     console.log("%cLike what you see? Let's connect! github.com/curthayman", "color:#00ff99; font-size:1.1em; font-style:italic;");
   }, 400 * (techs.length + 1));
 }, 600);
+
 function startMatrixRain() {
   const canvas = document.getElementById('matrix-canvas');
   const ctx = canvas.getContext('2d');
@@ -637,11 +581,13 @@ function startMatrixRain() {
     canvas.style.display = 'none';
   }, 5000);
 }
+
 window.getFlag = function() {
   console.log("%c🏴 FLAG: curt{c0ns0le-m4st3r}", "color:#00ff99; font-size:1.2em; font-weight:bold;");
   foundEasterEggs.consoleFlag = true;
   checkAchievement();
 };
+
 // Easter egg tracker and achievement logic
 const foundEasterEggs = {
   flag: false,
@@ -675,26 +621,7 @@ function showAchievementBadge() {
     badge.remove();
   }, 6000);
 }
-window.addEventListener('DOMContentLoaded', function() {
-  const loader = document.getElementById('matrixLoader');
-  const loadingText = document.getElementById('matrixLoadingText');
-  const loadingString = "loading...";
-  let i = 0;
 
-  function typeMatrix() {
-    if (i <= loadingString.length) {
-      loadingText.innerHTML = `<span style="color:#00ff99;">${loadingString.slice(0, i)}</span>`;
-      i++;
-      setTimeout(typeMatrix, 110 + Math.random() * 60);
-    } else {
-      setTimeout(() => {
-        loader.classList.add('hide');
-        setTimeout(() => loader.style.display = 'none', 700);
-      }, 600);
-    }
-  }
-  typeMatrix();
-});
 // Glitch effect for the privacy note
 (function() {
   const privacy = document.querySelector('.visitor-privacy-note');
@@ -707,22 +634,58 @@ window.addEventListener('DOMContentLoaded', function() {
   setInterval(glitchPrivacy, 3200);
 })();
 
-// --- Enhanced Threat Feed: Multiple Security News Sources ---
+// --- Enhanced Fully Shuffled Threat Feed ---
+
 const securityNewsFeeds = [
-  'https://thehackernews.com/rss.xml',
-  'https://krebsonsecurity.com/feed/',
-  'https://www.bleepingcomputer.com/feed/',
-  'https://feeds.feedburner.com/Securityweek'
+  { url: 'https://thehackernews.com/rss.xml', label: 'THN' },
+  { url: 'https://krebsonsecurity.com/feed/', label: 'Krebs' },
+  { url: 'https://www.bleepingcomputer.com/feed/', label: 'BleepingComputer' },
+  { url: 'https://feeds.feedburner.com/Securityweek', label: 'SecurityWeek' }
+];
+
+const securityEvents = [
+  "IDS initialized. Monitoring network traffic...",
+  "New SSH connection detected from 192.168.1.42",
+  "Blocked suspicious login attempt from 203.0.113.77",
+  "Firewall: Port scan detected and mitigated.",
+  "Malware signature update completed.",
+  "User 'admin' logged in from 10.0.0.5",
+  "Phishing email quarantined.",
+  "Brute force attack detected on port 22.",
+  "Vulnerability scan completed: 0 critical, 2 medium, 5 low.",
+  "Suspicious outbound traffic blocked.",
+  "SIEM: No critical alerts in the last hour.",
+  "VPN connection established from 198.51.100.23",
+  "Antivirus scan completed: No threats found.",
+  "New device connected: RaspberryPi-3B+",
+  "DDoS attempt detected and rate-limited.",
+  "User 'curt' escalated privileges to root.",
+  "Zero-day exploit attempt blocked.",
+  "Security policy updated successfully.",
+  "Log file rotated: /var/log/auth.log",
+  "All systems nominal.",
+  "SOC: Threat intelligence feed updated.",
+  "User 'guest' attempted privilege escalation.",
+  "SIEM: Unusual outbound DNS query detected.",
+  "Firewall: Geo-blocked IP attempted access.",
+  "Endpoint protection: Suspicious process terminated.",
+  "IDS: Possible data exfiltration detected.",
+  "SOC: New CVE alert processed.",
+  "WAF: SQL injection attempt blocked.",
+  "SOC: User 'neo' authenticated via SSH key.",
+  "SOC: Suspicious PowerShell activity detected.",
+  "SOC: RDP brute force attempt detected."
 ];
 
 // Helper to fetch and parse a single RSS feed via rss2json
-function fetchSingleFeed(rssUrl) {
-  return fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl))
+function fetchSingleFeed(feedObj) {
+  return fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedObj.url))
     .then(res => res.json())
     .then(data => (data.items || []).map(item => ({
       title: item.title,
       link: item.link,
-      pubDate: item.pubDate
+      pubDate: item.pubDate,
+      source: feedObj.label
     })))
     .catch(() => []);
 }
@@ -736,33 +699,63 @@ function fetchAllThreatFeeds() {
     });
 }
 
-function updateThreatFeed() {
-  fetchAllThreatFeeds().then(allHeadlines => {
-    const feed = document.getElementById('securityFeed');
-    // Remove old news lines (keep only simulated events)
-    Array.from(feed.querySelectorAll('.threat-news')).forEach(el => el.remove());
-
-    // Pick 4 random headlines from the latest 12
-    const shuffled = allHeadlines.slice(0, 12).sort(() => 0.5 - Math.random());
-    shuffled.slice(0, 4).forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'security-feed-line threat-news';
-      div.innerHTML = `[${new Date(item.pubDate).toLocaleTimeString()}] <a href="${item.link}" target="_blank" style="color:#00ff99;text-decoration:underline;">${item.title}</a>`;
-      feed.appendChild(div);
+function getSimulatedEvents(num) {
+  // Generate 'num' fake events with random times in the last 2 hours
+  const now = Date.now();
+  let events = [];
+  for (let i = 0; i < num; i++) {
+    const event = securityEvents[Math.floor(Math.random() * securityEvents.length)];
+    // Random time within last 2 hours
+    const time = new Date(now - Math.floor(Math.random() * 2 * 60 * 60 * 1000));
+    events.push({
+      title: event,
+      link: null,
+      pubDate: time.toISOString(),
+      source: "System"
     });
-
-    // Keep feed to 20 lines max
-    while (feed.children.length > 20) {
-      feed.removeChild(feed.firstChild);
-    }
-  });
+  }
+  return events;
 }
 
-// Fetch on load and every 5 minutes
-window.addEventListener('DOMContentLoaded', () => {
-  updateThreatFeed();
-  setInterval(updateThreatFeed, 5 * 60 * 1000);
-});
+function shuffleArray(arr) {
+  // Fisher-Yates shuffle
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function updateThreatFeedShuffled() {
+  fetchAllThreatFeeds().then(allHeadlines => {
+    // Get 8 real headlines and 12 simulated events for a total of 20
+    const realHeadlines = allHeadlines.slice(0, 8);
+    const fakeEvents = getSimulatedEvents(12);
+    const combined = shuffleArray([...realHeadlines, ...fakeEvents]);
+
+    // Sort by pubDate descending (most recent first)
+    combined.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+    // Shuffle again for randomness
+    shuffleArray(combined);
+
+    // Display the latest 20
+    const feed = document.getElementById('securityFeed');
+    feed.innerHTML = ""; // Clear all
+    combined.slice(0, 20).forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'security-feed-line' + (item.link ? ' threat-news' : '');
+      const timeStr = `[${new Date(item.pubDate).toLocaleTimeString()}]`;
+      if (item.link) {
+        div.innerHTML = `${timeStr} <span style="color:#888;">[${item.source}]</span> <a href="${item.link}" target="_blank" style="color:#00ff99;text-decoration:underline;">${item.title}</a>`;
+      } else {
+        div.innerHTML = `${timeStr} <span style="color:#888;">[${item.source}]</span> ${item.title}`;
+      }
+      feed.appendChild(div);
+    });
+    feed.scrollTop = feed.scrollHeight;
+  });
+}
 
 // --- Animated Hacker Cursor ---
 (function() {
@@ -784,7 +777,7 @@ window.addEventListener('DOMContentLoaded', () => {
     cursor.textContent = blink ? '▌' : '';
   }, 480);
 
-  // Optional: Hide cursor when mouse leaves window
+  // Hide cursor when mouse leaves window
   document.addEventListener('mouseleave', () => {
     cursor.style.opacity = 0;
   });
@@ -796,3 +789,66 @@ window.addEventListener('DOMContentLoaded', () => {
   cursor.style.transform = `translate(${lastX}px, ${lastY}px)`;
   cursor.textContent = '▌';
 })();
+
+// --- Unified DOMContentLoaded Initialization ---
+window.addEventListener('DOMContentLoaded', function() {
+  // Loader animation
+  const loader = document.getElementById('matrixLoader');
+  const loadingText = document.getElementById('matrixLoadingText');
+
+// Pick a random boot message for the loader
+// Hide the hacker cursor during loading
+document.getElementById('hacker-cursor').style.display = 'none';
+
+const bootMessages = [
+  '<span class="boot-green">[BOOT]</span> Initializing system...',
+  '<span class="boot-green">[OK]</span> Loading modules...',
+  '<span class="boot-green">[OK]</span> Establishing secure connection...',
+  '<span class="boot-green">[OK]</span> Authenticating user...',
+  '<span class="boot-green">[OK]</span> Mounting encrypted volumes...',
+  '<span class="boot-green">[OK]</span> Checking for rootkits...',
+  '<span class="boot-green">[OK]</span> Starting IDS/IPS...',
+  '<span class="boot-green">[OK]</span> Updating threat intelligence feeds...',
+  '<span class="boot-green">[OK]</span> Verifying digital signatures...',
+  '<span class="boot-green">[OK]</span> Loading hacking tools...',
+  '<span class="boot-green">[OK]</span> Welcome, Visitor. System ready.'
+];
+const randomBootMsg = bootMessages[Math.floor(Math.random() * bootMessages.length)];
+const loadingString = randomBootMsg.replace(/^<span[^>]*>.*?<\/span>\s*/, '');
+
+let i = 0;
+function typeMatrix() {
+  if (i <= loadingString.length) {
+    let prefix = '';
+    const match = randomBootMsg.match(/^<span[^>]*>.*?<\/span>/);
+    if (match) prefix = match[0] + ' ';
+    loadingText.innerHTML = prefix + `<span style="color:#00ff99;">${loadingString.slice(0, i)}</span>`;
+    i++;
+    setTimeout(typeMatrix, 110 + Math.random() * 60);
+  } else {
+    setTimeout(() => {
+      loader.classList.add('hide');
+      setTimeout(() => {
+        loader.style.display = 'none';
+        // Show the hacker cursor after loading is done
+        document.getElementById('hacker-cursor').style.display = '';
+      }, 700);
+    }, 600);
+  }
+}
+typeMatrix();
+
+
+
+  // Scroll to top
+  window.scrollTo(0, 0);
+
+  // Initialize all features
+  setMotd();
+  startTyping();
+  displaySystemInfo();
+  fetchGitHubProjects();
+  animateStats();
+  updateThreatFeedShuffled();
+  setInterval(updateThreatFeedShuffled, 5 * 60 * 1000);
+});
