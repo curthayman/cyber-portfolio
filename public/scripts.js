@@ -1,97 +1,97 @@
-    // Contact Modal Logic
-    function openContactModal() {
-      document.getElementById('contactModal').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-    function closeContactModal() {
-      document.getElementById('contactModal').style.display = 'none';
-      document.body.style.overflow = '';
-    }
-    // Close modal on ESC or click outside
-    window.addEventListener('keydown', function(e) {
-      if (e.key === "Escape") closeContactModal();
-    });
-    document.getElementById('contactModal').addEventListener('click', function(e) {
-      if (e.target === this) closeContactModal();
-    });
+// Contact Modal Logic
+function openContactModal() {
+  document.getElementById('contactModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeContactModal() {
+  document.getElementById('contactModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+// Close modal on ESC or click outside
+window.addEventListener('keydown', function(e) {
+  if (e.key === "Escape") closeContactModal();
+});
+document.getElementById('contactModal').addEventListener('click', function(e) {
+  if (e.target === this) closeContactModal();
+});
 
-    // Easter egg fortunes
-    const fortunes = [
-      "Hint: Sometimes the best secrets are hidden in plain sight (or in the source code)...",
-      "The quieter you become, the more you are able to hear.",
-      "Hack the planet!",
-      "Try 'sudo make me a sandwich' 😉",
-      "Security is a process, not a product.",
-      "You are root... in your own life.",
-      "There is no patch for human stupidity.",
-      "The best way to predict the future is to invent it."
-    ];
+// Easter egg fortunes
+const fortunes = [
+  "Hint: Sometimes the best secrets are hidden in plain sight (or in the source code)...",
+  "The quieter you become, the more you are able to hear.",
+  "Hack the planet!",
+  "Try 'sudo make me a sandwich' 😉",
+  "Security is a process, not a product.",
+  "You are root... in your own life.",
+  "There is no patch for human stupidity.",
+  "The best way to predict the future is to invent it."
+];
 
-    // Matrix animation
-    function matrixEffect() {
-      let interval;
-      const chars = "abcdefghijklmnopqrstuvwxyz0123456789#$%&@";
-      let running = true;
-      printLine("Matrix mode activated. Press ENTER to exit.");
-      function randomLine() {
-        let line = "";
-        for (let i = 0; i < 60; i++) {
-          line += chars[Math.floor(Math.random() * chars.length)];
-        }
-        printLine(`<span style="color:#00ff00;">${line}</span>`, true);
-      }
-      interval = setInterval(randomLine, 80);
-      cliInput.disabled = false;
-      cliInput.value = "";
-      cliInput.focus();
-      cliForm.onsubmit = function(e) {
-        e.preventDefault();
-        if (running) {
-          clearInterval(interval);
-          printLine("Matrix mode exited.");
-          running = false;
-          cliForm.onsubmit = cliSubmitHandler;
-        }
-        cliInput.value = "";
-      };
+// Matrix animation
+function matrixEffect() {
+  let interval;
+  const chars = "abcdefghijklmnopqrstuvwxyz0123456789#$%&@";
+  let running = true;
+  printLine("Matrix mode activated. Press ENTER to exit.");
+  function randomLine() {
+    let line = "";
+    for (let i = 0; i < 60; i++) {
+      line += chars[Math.floor(Math.random() * chars.length)];
     }
+    printLine(`<span style="color:#00ff00;">${line}</span>`, true);
+  }
+  interval = setInterval(randomLine, 80);
+  cliInput.disabled = false;
+  cliInput.value = "";
+  cliInput.focus();
+  cliForm.onsubmit = function(e) {
+    e.preventDefault();
+    if (running) {
+      clearInterval(interval);
+      printLine("Matrix mode exited.");
+      running = false;
+      cliForm.onsubmit = cliSubmitHandler;
+    }
+    cliInput.value = "";
+  };
+}
 
-    // Uptime widget
-    let pageLoadTime = Date.now();
-    function getUptime() {
-      const now = Date.now();
-      let diff = Math.floor((now - pageLoadTime) / 1000);
-      const hours = Math.floor(diff / 3600);
-      diff %= 3600;
-      const minutes = Math.floor(diff / 60);
-      const seconds = diff % 60;
-      return `${hours}h ${minutes}m ${seconds}s`;
-    }
+// Uptime widget
+let pageLoadTime = Date.now();
+function getUptime() {
+  const now = Date.now();
+  let diff = Math.floor((now - pageLoadTime) / 1000);
+  const hours = Math.floor(diff / 3600);
+  diff %= 3600;
+  const minutes = Math.floor(diff / 60);
+  const seconds = diff % 60;
+  return `${hours}h ${minutes}m ${seconds}s`;
+}
 
-    // Real-Time Clock for CLI Statusbar
-    function updateClock() {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString();
-      const uptime = getUptime();
-      document.getElementById('cliClock').textContent = `🕒 ${timeStr} | Uptime: ${uptime}`;
-    }
-    setInterval(updateClock, 1000);
+// Real-Time Clock for CLI Statusbar
+function updateClock() {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString();
+  const uptime = getUptime();
+  document.getElementById('cliClock').textContent = `🕒 ${timeStr} | Uptime: ${uptime}`;
+}
+setInterval(updateClock, 1000);
 
-    // Fake MOTD Banner
-    function setMotd() {
-      const now = new Date();
-      // Fake last login: yesterday at a random time, from a random city
-      const cities = ["Baltimore, MD", "New York, NY", "London, UK", "San Francisco, CA", "Berlin, DE", "Tokyo, JP"];
-      const city = cities[Math.floor(Math.random() * cities.length)];
-      const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-      yesterday.setHours(Math.floor(Math.random() * 24));
-      yesterday.setMinutes(Math.floor(Math.random() * 60));
-      yesterday.setSeconds(Math.floor(Math.random() * 60));
-      const lastLogin = yesterday.toLocaleString();
-      document.getElementById('motdText').innerHTML =
-        `<span style="color:#00ff99;">Welcome, Visitor. Last login: ${lastLogin} from ${city}</span>`;
-      updateClock();
-    }
+// Fake MOTD Banner
+function setMotd() {
+  const now = new Date();
+  // Fake last login: yesterday at a random time, from a random city
+  const cities = ["Baltimore, MD", "New York, NY", "London, UK", "San Francisco, CA", "Berlin, DE", "Tokyo, JP"];
+  const city = cities[Math.floor(Math.random() * cities.length)];
+  const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  yesterday.setHours(Math.floor(Math.random() * 24));
+  yesterday.setMinutes(Math.floor(Math.random() * 60));
+  yesterday.setSeconds(Math.floor(Math.random() * 60));
+  const lastLogin = yesterday.toLocaleString();
+  document.getElementById('motdText').innerHTML =
+    `<span style="color:#00ff99;">Welcome, Visitor. Last login: ${lastLogin} from ${city}</span>`;
+  updateClock();
+}
 
 // Typewriter effect for favorite commands only
 function startTyping() {
@@ -100,13 +100,13 @@ function startTyping() {
     "sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say cache flushed",
     "sudo nmap -sV --script=vuln targetip",
     "curl cheat.sh/nmap",
-    "openssl rand -base64 34" // <-- Add this line
+    "openssl rand -base64 34"
   ];
   typeLine(commands[0], 'line1', () => {
     typeLine(commands[1], 'line2', () => {
       typeLine(commands[2], 'line3', () => {
         typeLine(commands[3], 'line4', () => {
-          typeLine(commands[4], 'line5'); // <-- Add this line
+          typeLine(commands[4], 'line5');
         });
       });
     });
@@ -122,7 +122,7 @@ function typeLine(text, elementId, callback) {
     if (i < text.length) {
       el.textContent += text.charAt(i);
       i++;
-      setTimeout(type, 18); // Adjust speed as desired
+      setTimeout(type, 18);
     } else if (callback) {
       callback();
     }
@@ -144,8 +144,8 @@ function copyTypedLine(lineId) {
 
   // Change to "Copied" and highlight color
   button.textContent = "Copied";
-  button.style.backgroundColor = "#00ff99"; // Neon green
-  button.style.color = "#181f1f";           // Dark text for contrast
+  button.style.backgroundColor = "#00ff99";
+  button.style.color = "#181f1f";
   button.disabled = true;
 
   setTimeout(() => {
@@ -153,35 +153,21 @@ function copyTypedLine(lineId) {
     button.style.backgroundColor = originalBg;
     button.style.color = originalColor;
     button.disabled = false;
-  }, 1200); // 1.2 seconds, adjust as you like
+  }, 1200);
 }
 
-    function typeLine(text, elementId, callback) {
-      let i = 0;
-      const el = document.getElementById(elementId);
-      el.textContent = '';
-      const interval = setInterval(() => {
-        el.textContent += text[i];
-        i++;
-        if (i === text.length) {
-          clearInterval(interval);
-          if (callback) setTimeout(callback, 300);
-        }
-      }, 40);
-    }
-
-  function displaySystemInfo() {
+function displaySystemInfo() {
   document.getElementById('ua').textContent = navigator.userAgent;
   document.getElementById('platform').textContent = navigator.platform;
   // Fetch and display the visitor's IP address (no storage, just display)
-fetch('https://api.ipify.org?format=json')
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('ip').textContent = data.ip;
-  })
-  .catch(() => {
-    document.getElementById('ip').textContent = "Unavailable";
-  });
+  fetch('https://api.ipify.org?format=json')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('ip').textContent = data.ip;
+    })
+    .catch(() => {
+      document.getElementById('ip').textContent = "Unavailable";
+    });
 }
 // Fetch and display the visitor's IP address and location (no storage, just display)
 fetch('https://api.ipify.org?format=json')
@@ -250,33 +236,85 @@ fetch('https://api.ipify.org?format=json')
     document.getElementById('ip-map').style.display = 'none';
   });
 
-    // CLI Terminal Logic
-    const cliOutput = document.getElementById('cliOutput');
-    const cliForm = document.getElementById('cliForm');
-    const cliInput = document.getElementById('cliInput');
+// CLI Terminal Logic
+const cliOutput = document.getElementById('cliOutput');
+const cliForm = document.getElementById('cliForm');
+const cliInput = document.getElementById('cliInput');
 
-    const commands = {
-      help: "Available commands: help, about, clear, certs, social, exit, uptime, fortune, matrix, sudo make me a sandwich, weather, nmap, hint, submit <flag>",
-      about: "Curt Hayman, CEH | Penetration Tester. 15+ years WordPress 7+ years CyberSecurity, drone pilot, sneakerhead.",
-      certs: "CEH, Digital Forensics, Bug Bounty, Master Ethical Hacker, Master Wifi Hacking, Wireshark.",
-      social: "Droners: <a href='https://droners.com/curtthecoder' target='_blank'>Profile</a> | Facebook: <a href='https://www.facebook.com/groups/undergroundhiphoponly' target='_blank'>UGHHO</a> | Facebook: <a href='https://www.facebook.com/imcurthayman/' target='_blank'>Personal</a>",
-      exit: "Session ended. Refresh to restart.",
-      weather: "Cyber Weather Report: Packet storms expected. 0-day showers in the afternoon. Phishing attempts: 42%. Stay patched and carry an umbrella! ☔️",
-      hint: "Hint: Sometimes the best secrets are hidden in plain sight (or in the source code)..."
-    };
+const commands = {
+  help: "Available commands: help, rm -rf /, selfdestruct, about, clear, certs, social, exit, uptime, fortune, matrix, sudo make me a sandwich, weather, nmap, hint, submit <flag>",
+  about: "Curt Hayman, CEH | Penetration Tester. 15+ years WordPress 7+ years CyberSecurity, drone pilot, sneakerhead.",
+  certs: "CEH, Digital Forensics, Bug Bounty, Master Ethical Hacker, Master Wifi Hacking, Wireshark.",
+  social: "Droners: <a href='https://droners.com/curtthecoder' target='_blank'>Profile</a> | Facebook: <a href='https://www.facebook.com/groups/undergroundhiphoponly' target='_blank'>UGHHO</a> | Facebook: <a href='https://www.facebook.com/imcurthayman/' target='_blank'>Personal</a>",
+  exit: "Session ended. Refresh to restart.",
+  weather: "Cyber Weather Report: Packet storms expected. 0-day showers in the afternoon. Phishing attempts: 42%. Stay patched and carry an umbrella! ☔️",
+  hint: "Hint: Sometimes the best secrets are hidden in plain sight (or in the source code)..."
+};
 
-    function printLine(text, isHtml) {
-      const div = document.createElement('div');
-      if (isHtml) {
-        div.innerHTML = text;
-      } else {
-        div.textContent = text;
-      }
-      cliOutput.appendChild(div);
-      cliOutput.scrollTop = cliOutput.scrollHeight;
+function printLine(text, isHtml) {
+  const div = document.createElement('div');
+  if (isHtml) {
+    div.innerHTML = text;
+  } else {
+    div.textContent = text;
+  }
+  cliOutput.appendChild(div);
+  cliOutput.scrollTop = cliOutput.scrollHeight;
+}
+
+// --- Self-Destruct Sequence ---
+function startSelfDestruct() {
+  printLine('<span style="color:#ff4444;">WARNING: Self-destruct sequence initiated!</span>', true);
+
+  // Overlay
+  let overlay = document.createElement('div');
+  overlay.id = 'selfDestructOverlay';
+  overlay.style.position = 'fixed';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.background = 'rgba(0,0,0,0.95)';
+  overlay.style.zIndex = 999999;
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.flexDirection = 'column';
+  overlay.innerHTML = `
+    <div style="color:#ff4444; font-size:2.5em; font-family:monospace; text-align:center;">
+      <span id="selfDestructCountdown">5</span><br>
+      <span style="font-size:1.2em;">Self-destruct in...</span>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  // Screen shake effect
+  let shakeInterval = setInterval(() => {
+    document.body.style.transform = `translate(${Math.random()*10-5}px,${Math.random()*10-5}px)`;
+  }, 50);
+
+  // Countdown
+  let count = 5;
+  let countdown = setInterval(() => {
+    count--;
+    document.getElementById('selfDestructCountdown').textContent = count;
+    if (count === 0) {
+      clearInterval(countdown);
+      clearInterval(shakeInterval);
+      document.body.style.transform = '';
+      overlay.innerHTML = `
+        <div style="color:#00ff99; font-size:2.2em; font-family:monospace; text-align:center;">
+          <span>💥 Self-destruct sequence aborted.<br>Just kidding! 😁</span>
+        </div>
+      `;
+      setTimeout(() => {
+        overlay.remove();
+      }, 2200);
     }
+  }, 1000);
+}
 
-    function cliSubmitHandler(e) {
+function cliSubmitHandler(e) {
   e.preventDefault();
   const rawInput = cliInput.value.trim();
   const cmd = rawInput.toLowerCase();
@@ -284,21 +322,27 @@ fetch('https://api.ipify.org?format=json')
   printLine(`<span style="color:#fff;">curt@portfolio:~$</span> ${rawInput}`, true);
 
   // --- Easter Egg Commands ---
-if (cmd === ":flag") {
-  printLine("FLAG: curt{h4ck3d-th3-p0rtf0li0}");
-  foundEasterEggs.flag = true;
-  checkAchievement();
-}
-else if (cmd === ":matrix") {
-  printLine("Activating Matrix mode...");
-  startMatrixRain();
-  foundEasterEggs.matrix = true;
-  checkAchievement();
-}
+  if (cmd === ":flag") {
+    printLine("FLAG: curt{h4ck3d-th3-p0rtf0li0}");
+    foundEasterEggs.flag = true;
+    checkAchievement();
+  }
+  else if (cmd === ":matrix") {
+    printLine("Activating Matrix mode...");
+    startMatrixRain();
+    foundEasterEggs.matrix = true;
+    checkAchievement();
+  }
   else if (cmd === ":sudo") {
     printLine("Permission denied: You are not root. 😉");
   }
   // --- End Easter Egg Commands ---
+
+  // --- Self-Destruct Command ---
+  else if (cmd === "rm -rf /" || cmd === "selfdestruct") {
+    startSelfDestruct();
+  }
+  // --- End Self-Destruct Command ---
 
   else if (cmd === "help" || cmd === "help") printLine(commands.help);
   else if (cmd === "about") printLine(commands.about);
@@ -340,72 +384,72 @@ else if (cmd === ":matrix") {
   cliInput.value = "";
 }
 
-    cliForm.onsubmit = cliSubmitHandler;
+cliForm.onsubmit = cliSubmitHandler;
 
-    printLine("Welcome to curt@terminal");
-    printLine("Type help for commands.");
+printLine("Welcome to curt@terminal");
+printLine("Type help for commands.");
 
-    // Fetch recent GitHub projects
-    function fetchGitHubProjects() {
-      const username = "curthayman";
-      const projectsList = document.getElementById('githubProjects');
-      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=5`)
-        .then(response => response.json())
-        .then(repos => {
-          projectsList.innerHTML = "";
-          repos.slice(0, 5).forEach(repo => {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>
-              <span class="desc">${repo.description ? repo.description : ''}</span>`;
-            projectsList.appendChild(li);
-          });
-          if (repos.length === 0) {
-            projectsList.innerHTML = "<li>No public projects found.</li>";
-          }
-        })
-        .catch(() => {
-          projectsList.innerHTML = "<li>Could not load projects from GitHub.</li>";
-        });
-    }
-
-    // Modal for cert images
-    function expandImage(src) {
-      const modal = document.getElementById('certModal');
-      const modalImg = document.getElementById('modalImage');
-      modal.style.display = "block";
-      modalImg.src = src;
-    }
-    function closeModal() {
-      document.getElementById('certModal').style.display = "none";
-    }
-
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert("✅ Command copied to clipboard!");
+// Fetch recent GitHub projects
+function fetchGitHubProjects() {
+  const username = "curthayman";
+  const projectsList = document.getElementById('githubProjects');
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=5`)
+    .then(response => response.json())
+    .then(repos => {
+      projectsList.innerHTML = "";
+      repos.slice(0, 5).forEach(repo => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>
+          <span class="desc">${repo.description ? repo.description : ''}</span>`;
+        projectsList.appendChild(li);
       });
-    }
+      if (repos.length === 0) {
+        projectsList.innerHTML = "<li>No public projects found.</li>";
+      }
+    })
+    .catch(() => {
+      projectsList.innerHTML = "<li>Could not load projects from GitHub.</li>";
+    });
+}
 
-    function scrollCerts(amount) {
-      const container = document.getElementById('certScroll');
-      container.scrollLeft += amount;
-    }
+// Modal for cert images
+function expandImage(src) {
+  const modal = document.getElementById('certModal');
+  const modalImg = document.getElementById('modalImage');
+  modal.style.display = "block";
+  modalImg.src = src;
+}
+function closeModal() {
+  document.getElementById('certModal').style.display = "none";
+}
 
-    function animateStats() {
-      document.querySelectorAll('.stat-number').forEach(stat => {
-        const target = +stat.getAttribute('data-target');
-        let count = 0;
-        const increment = Math.ceil(target / 60);
-        function update() {
-          count += increment;
-          if (count > target) count = target;
-          stat.textContent = count;
-          if (count < target) {
-            requestAnimationFrame(update);
-          }
-        }
-        update();
-      });
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    alert("✅ Command copied to clipboard!");
+  });
+}
+
+function scrollCerts(amount) {
+  const container = document.getElementById('certScroll');
+  container.scrollLeft += amount;
+}
+
+function animateStats() {
+  document.querySelectorAll('.stat-number').forEach(stat => {
+    const target = +stat.getAttribute('data-target');
+    let count = 0;
+    const increment = Math.ceil(target / 60);
+    function update() {
+      count += increment;
+      if (count > target) count = target;
+      stat.textContent = count;
+      if (count < target) {
+        requestAnimationFrame(update);
+      }
     }
+    update();
+  });
+}
 const securityEvents = [
   "IDS initialized. Monitoring network traffic...",
   "New SSH connection detected from 192.168.1.42",
@@ -445,34 +489,33 @@ function addSecurityFeedLine() {
     feed.removeChild(feed.firstChild);
   }
 }
-    // Initialize everything on load
-    window.onload = () => {
-      window.scrollTo(0, 0);
-      setMotd();
-      startTyping();
-      displaySystemInfo();
-      fetchGitHubProjects();
-      animateStats();
-      setInterval(addSecurityFeedLine, 2200);
-      // cliInput.focus(); // intentionally not focusing to prevent scroll
-    };
+// Initialize everything on load
+window.onload = () => {
+  window.scrollTo(0, 0);
+  setMotd();
+  startTyping();
+  displaySystemInfo();
+  fetchGitHubProjects();
+  animateStats();
+  setInterval(addSecurityFeedLine, 2200);
+  // cliInput.focus(); // intentionally not focusing to prevent scroll
+};
 
-  const bootMessages = [
-    '<span class="boot-green">[BOOT]</span> Initializing system...',
-    '<span class="boot-green">[OK]</span> Loading modules...',
-    '<span class="boot-green">[OK]</span> Establishing secure connection...',
-    '<span class="boot-green">[OK]</span> Authenticating user...',
-    '<span class="boot-green">[OK]</span> Mounting encrypted volumes...',
-    '<span class="boot-green">[OK]</span> Checking for rootkits...',
-    '<span class="boot-green">[OK]</span> Starting IDS/IPS...',
-    '<span class="boot-green">[OK]</span> Updating threat intelligence feeds...',
-    '<span class="boot-green">[OK]</span> Verifying digital signatures...',
-    '<span class="boot-green">[OK]</span> Loading hacking tools...',
-    '<span class="boot-green">[OK]</span> Welcome, Visitor. System ready.'
-  ];
+const bootMessages = [
+  '<span class="boot-green">[BOOT]</span> Initializing system...',
+  '<span class="boot-green">[OK]</span> Loading modules...',
+  '<span class="boot-green">[OK]</span> Establishing secure connection...',
+  '<span class="boot-green">[OK]</span> Authenticating user...',
+  '<span class="boot-green">[OK]</span> Mounting encrypted volumes...',
+  '<span class="boot-green">[OK]</span> Checking for rootkits...',
+  '<span class="boot-green">[OK]</span> Starting IDS/IPS...',
+  '<span class="boot-green">[OK]</span> Updating threat intelligence feeds...',
+  '<span class="boot-green">[OK]</span> Verifying digital signatures...',
+  '<span class="boot-green">[OK]</span> Loading hacking tools...',
+  '<span class="boot-green">[OK]</span> Welcome, Visitor. System ready.'
+];
 
-
- // Glitch Title Effect (cycles through all titles, never resets)
+// Glitch Title Effect (cycles through all titles, never resets)
 (function() {
   const titles = [
     "Cyber Security Analyst",
@@ -498,7 +541,7 @@ function addSecurityFeedLine() {
   }
   setInterval(glitchTitle, 3400); // Glitch every 3.4 seconds
 })();
-   // Back to Top Button
+// Back to Top Button
 (function() {
   const btn = document.getElementById('backToTopBtn');
   window.addEventListener('scroll', function() {
@@ -512,7 +555,7 @@ function addSecurityFeedLine() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
-   (function() {
+(function() {
   const privacy = document.getElementById('privacyGlitch');
   function glitchPrivacy() {
     privacy.classList.add('glitching');
@@ -557,7 +600,7 @@ setTimeout(() => {
     console.log("%cLike what you see? Let's connect! github.com/curthayman", "color:#00ff99; font-size:1.1em; font-style:italic;");
   }, 400 * (techs.length + 1));
 }, 600);
-  function startMatrixRain() {
+function startMatrixRain() {
   const canvas = document.getElementById('matrix-canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
@@ -632,7 +675,7 @@ function showAchievementBadge() {
     badge.remove();
   }, 6000);
 }
-  window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function() {
   const loader = document.getElementById('matrixLoader');
   const loadingText = document.getElementById('matrixLoadingText');
   const loadingString = "loading...";
@@ -652,14 +695,104 @@ function showAchievementBadge() {
   }
   typeMatrix();
 });
- // Glitch effect for the privacy note
-  (function() {
-    const privacy = document.querySelector('.visitor-privacy-note');
-    function glitchPrivacy() {
-      privacy.classList.add('glitching');
-      setTimeout(() => {
-        privacy.classList.remove('glitching');
-      }, 800);
+// Glitch effect for the privacy note
+(function() {
+  const privacy = document.querySelector('.visitor-privacy-note');
+  function glitchPrivacy() {
+    privacy.classList.add('glitching');
+    setTimeout(() => {
+      privacy.classList.remove('glitching');
+    }, 800);
+  }
+  setInterval(glitchPrivacy, 3200);
+})();
+
+// --- Enhanced Threat Feed: Multiple Security News Sources ---
+const securityNewsFeeds = [
+  'https://thehackernews.com/rss.xml',
+  'https://krebsonsecurity.com/feed/',
+  'https://www.bleepingcomputer.com/feed/',
+  'https://feeds.feedburner.com/Securityweek'
+];
+
+// Helper to fetch and parse a single RSS feed via rss2json
+function fetchSingleFeed(rssUrl) {
+  return fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl))
+    .then(res => res.json())
+    .then(data => (data.items || []).map(item => ({
+      title: item.title,
+      link: item.link,
+      pubDate: item.pubDate
+    })))
+    .catch(() => []);
+}
+
+function fetchAllThreatFeeds() {
+  // Fetch all feeds in parallel
+  return Promise.all(securityNewsFeeds.map(fetchSingleFeed))
+    .then(results => {
+      // Flatten and sort by date (most recent first)
+      return results.flat().sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    });
+}
+
+function updateThreatFeed() {
+  fetchAllThreatFeeds().then(allHeadlines => {
+    const feed = document.getElementById('securityFeed');
+    // Remove old news lines (keep only simulated events)
+    Array.from(feed.querySelectorAll('.threat-news')).forEach(el => el.remove());
+
+    // Pick 4 random headlines from the latest 12
+    const shuffled = allHeadlines.slice(0, 12).sort(() => 0.5 - Math.random());
+    shuffled.slice(0, 4).forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'security-feed-line threat-news';
+      div.innerHTML = `[${new Date(item.pubDate).toLocaleTimeString()}] <a href="${item.link}" target="_blank" style="color:#00ff99;text-decoration:underline;">${item.title}</a>`;
+      feed.appendChild(div);
+    });
+
+    // Keep feed to 20 lines max
+    while (feed.children.length > 20) {
+      feed.removeChild(feed.firstChild);
     }
-    setInterval(glitchPrivacy, 3200);
-  })();
+  });
+}
+
+// Fetch on load and every 5 minutes
+window.addEventListener('DOMContentLoaded', () => {
+  updateThreatFeed();
+  setInterval(updateThreatFeed, 5 * 60 * 1000);
+});
+
+// --- Animated Hacker Cursor ---
+(function() {
+  const cursor = document.getElementById('hacker-cursor');
+  let blink = true;
+  let lastX = window.innerWidth / 2, lastY = window.innerHeight / 2;
+
+  // Move the cursor div to follow the mouse
+  document.addEventListener('mousemove', function(e) {
+    lastX = e.clientX;
+    lastY = e.clientY;
+    cursor.style.transform = `translate(${lastX}px, ${lastY}px)`;
+    cursor.style.opacity = 1;
+  });
+
+  // Blinking caret effect
+  setInterval(() => {
+    blink = !blink;
+    cursor.textContent = blink ? '▌' : '';
+  }, 480);
+
+  // Optional: Hide cursor when mouse leaves window
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = 0;
+  });
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = 1;
+  });
+
+  // Start at center
+  cursor.style.transform = `translate(${lastX}px, ${lastY}px)`;
+  cursor.textContent = '▌';
+})();
