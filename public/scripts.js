@@ -524,10 +524,9 @@ const asciiArt = `
 const techs = [
   { name: "HTML5", style: "background:#e44d26; color:#fff; padding:2px 8px; border-radius:4px; font-weight:bold;" },
   { name: "CSS3", style: "background:#2965f1; color:#fff; padding:2px 8px; border-radius:4px; font-weight:bold;" },
-  { name: "JavaScript", style: "background:#f7df1e; color:#222; padding:2px 8px; border-radius:4px; font-weight:bold;" },
+  { name: "Vanilla JavaScript", style: "background:#f7df1e; color:#222; padding:2px 8px; border-radius:4px; font-weight:bold;" },
   { name: "Fira Code Font", style: "background:#181f1f; color:#00ff99; padding:2px 8px; border-radius:4px; font-weight:bold;" }
 ];
-
 // Print ASCII art with one style
 console.log("%c" + asciiArt, "color:#00ff99; font-family:monospace; font-size:1.1em; font-weight:bold;");
 
@@ -756,7 +755,12 @@ function updateThreatFeedShuffled() {
     feed.scrollTop = feed.scrollHeight;
   });
 }
-
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+if (isMobileDevice()) {
+  document.getElementById('hacker-cursor').style.display = 'none';
+}
 // --- Animated Hacker Cursor ---
 (function() {
   const cursor = document.getElementById('hacker-cursor');

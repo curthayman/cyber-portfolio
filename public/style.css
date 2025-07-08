@@ -1,7 +1,7 @@
     body {
       margin: 0;
       font-family: 'Fira Code', monospace;
-      background: #0f0f0f url('curtspage.png') center center no-repeat;
+      background: #0f0f0f url('images/curtspage.png') center center no-repeat;
       background-size: cover;
       background-attachment: fixed;
       color: #e0e0e0;
@@ -787,3 +787,9 @@ body, html {
   /* Optional: Add a little glow */
   filter: drop-shadow(0 0 6px #00ff99);
 }
+@media (hover: none) and (pointer: coarse) {
+  #hacker-cursor {
+    display: none !important;
+  }
+}
+

@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "vercel": "^43.0.0"
+    "vercel": "^32.0.1"
   },
   "scripts": {
     "build": "echo 'No build necessary'"
