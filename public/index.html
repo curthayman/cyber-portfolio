@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Certified Ethical Hacker & Penetration Tester Portfolio" />
   <!-- Primary Meta Tags -->
-<title>Curt Hayman, CEH | Penetration Tester & Ethical Hacker & WordPress Administrator Portfolio</title>
-<link rel="stylesheet" href="style.css">
-<meta name="title" content="Curt Hayman,CEH | Penetration Tester & Ethical Hacker Portfolio">
-<meta name="description" content="Curt Hayman,CEH is a Certified Ethical Hacker and Penetration Tester with 15+ years of experience in cybersecurity, WordPress, and digital forensics. Available for freelance and consulting projects.">
+  <title>Curt Hayman, CEH | Penetration Tester & Ethical Hacker & WordPress Administrator Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="title" content="Curt Hayman,CEH | Penetration Tester & Ethical Hacker Portfolio">
+  <meta name="description" content="Curt Hayman,CEH is a Certified Ethical Hacker and Penetration Tester with 15+ years of experience in cybersecurity, WordPress, and digital forensics. Available for freelance and consulting projects.">
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://iamcurthayman.com/">
@@ -33,13 +32,14 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-</head>
-<div id="matrixLoader">
-  <div class="matrix-loader-content">
-    <pre id="matrixLoadingText"></pre>
-  </div>
-</div>
-<body>
+  </head>
+  <body>
+    <div id="matrixLoader">
+      <div class="matrix-loader-content">
+        <pre id="matrixLoadingText"></pre>
+      </div>
+    </div>
+    <main>
   <div class="bg-overlay"></div>
   <header>
 <h1>
@@ -47,10 +47,10 @@
 </h1>
     <div id="hireBanner" onclick="openContactModal()" tabindex="0" role="button" aria-label="Contact Me (Available for projects)">I'm currently available for projects</div>
   </header>
-  <button class="contact-btn" onclick="openContactModal()">Contact Me</button>
+  <button class="contact-btn" id="contactBtn" aria-label="Contact Me">Contact Me</button>
   <div class="contact-modal" id="contactModal">
     <div class="contact-modal-content">
-      <button class="contact-modal-close" onclick="closeContactModal()" aria-label="Close">&times;</button>
+      <button class="contact-modal-close" id="contactModalClose" aria-label="Close Contact Modal">&times;</button>
       <h2>Contact Curt Hayman,CEH</h2>
       <p>
         <strong>Email:</strong>
@@ -123,7 +123,7 @@
   <section>
   <h3>Certifications</h3>
   <div class="cert-section-wrapper">
-    <button class="scroll-btn" onclick="scrollCerts(-300)">&#8592;</button>
+    <button class="scroll-btn" id="scrollLeftBtn" aria-label="Scroll certifications left">&#8592;</button>
     <div class="badges-wrapper" id="certScroll">
       <div class="badge" onclick="expandImage('images/certificateech.png')" title="Issued: July 16, 2023\nExpires: July 15, 2026">
         <img src="images/certificateech.png" alt="CEH Certificate" class="cert-img" loading="lazy" />
@@ -144,7 +144,7 @@
         <img src="images/wireshark-certificate.jpeg" alt="WireShark Certificate" class="cert-img" loading="lazy" />
       </div>
     </div>
-    <button class="scroll-btn" onclick="scrollCerts(300)">&#8594;</button>
+    <button class="scroll-btn" id="scrollRightBtn" aria-label="Scroll certifications right">&#8594;</button>
   </div>
 </section>
 <section class="testimonials-section">
@@ -168,9 +168,9 @@
     </div>
   </div>
 </section>
-  <div id="certModal" class="modal">
-    <span class="modal-close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage">
+  <div id="certModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+    <span class="modal-close" id="certModalClose" aria-label="Close Certificate Modal">&times;</span>
+    <img class="modal-content" id="modalImage" alt="Certificate enlarged preview">
   </div>
   <div class="commands-section">
   <h3>My Favorite Commands</h3>
@@ -178,49 +178,49 @@
     <div class="cmd-label">Get memory statistics, run:</div>
     <div class="command-terminal">
       <div class="typed-line" id="line1"></div>
-      <button class="copy-btn" onclick="copyTypedLine('line1')">Copy</button>
+      <button class="copy-btn" data-copy="line1" aria-label="Copy memory statistics command">Copy</button>
     </div>
   </div>
   <div class="command-group">
     <div class="cmd-label">Cache Flush on Mac, run:</div>
     <div class="command-terminal">
       <div class="typed-line" id="line2"></div>
-      <button class="copy-btn" onclick="copyTypedLine('line2')">Copy</button>
+      <button class="copy-btn" data-copy="line2" aria-label="Copy cache flush command">Copy</button>
     </div>
   </div>
   <div class="command-group">
     <div class="cmd-label">Find Vulnerable Ports, run:</div>
     <div class="command-terminal">
       <div class="typed-line" id="line3"></div>
-      <button class="copy-btn" onclick="copyTypedLine('line3')">Copy</button>
+      <button class="copy-btn" data-copy="line3" aria-label="Copy vulnerable ports command">Copy</button>
     </div>
   </div>
   <div class="command-group">
     <div class="cmd-label">Need more information on a command?</div>
     <div class="command-terminal">
       <div class="typed-line" id="line4"></div>
-      <button class="copy-btn" onclick="copyTypedLine('line4')">Copy</button>
+      <button class="copy-btn" data-copy="line4" aria-label="Copy help command">Copy</button>
     </div>
   </div>
   <div class="command-group">
   <div class="cmd-label">Generate a strong random password, run:</div>
   <div class="command-terminal">
     <div class="typed-line" id="line5"></div>
-    <button class="copy-btn" onclick="copyTypedLine('line5')">Copy</button>
+    <button class="copy-btn" data-copy="line5" aria-label="Copy password generation command">Copy</button>
   </div>
 </div>
 </div>
-<section class="gadgets-section">
-  <h3>Favorite Hacking Toys</h3>
-  <ul class="gadgets-list">
-    <li><a href="https://shop.flipperzero.one/" target="_blank" rel="noopener noreferrer"> 🐬 Flipper Zero</a></li>
-    <li><a href="https://rabbit-labs.com/product/the-phantom-by-rabbit-labs/?v=0b3b97fa6688" target="_blank" rel="noopener noreferrer"> 👻 The Phantom</a></li>
-    <li><a href="https://hak5.org/products/usb-rubber-ducky" target="_blank" rel="noopener noreferrer"> 🦆 Rubber Ducky</a></li>
-    <li><a href="https://shop.flipperzero.one/products/wifi-devboard" target="_blank" rel="noopener noreferrer"> 📶 WiFi Dev Board</a></li>
-    <li><a href="https://medicatusb.com/" target="_blank" rel="noopener noreferrer"> 💉 MediCat USB</a></li>
-    <li><a href="https://shop.m5stack.com/products/m5stack-core2-esp32-iot-development-kit-v1-1?ref=7h30th3r0n3" target="_blank" rel="noopener noreferrer">👨🏽‍💻 M5Stack Core2</a></li>
-  </ul>
-</section>
+    <section class="gadgets-section">
+      <h3>Favorite Hacking Toys</h3>
+      <ul class="gadgets-list">
+        <li><a href="https://shop.flipperzero.one/" target="_blank" rel="noopener noreferrer"> 🐬 Flipper Zero</a></li>
+        <li><a href="https://rabbit-labs.com/product/the-phantom-by-rabbit-labs/?v=0b3b97fa6688" target="_blank" rel="noopener noreferrer"> 👻 The Phantom</a></li>
+        <li><a href="https://hak5.org/products/usb-rubber-ducky" target="_blank" rel="noopener noreferrer"> 🦆 Rubber Ducky</a></li>
+        <li><a href="https://shop.flipperzero.one/products/wifi-devboard" target="_blank" rel="noopener noreferrer"> 📶 WiFi Dev Board</a></li>
+        <li><a href="https://medicatusb.com/" target="_blank" rel="noopener noreferrer"> 💉 MediCat USB</a></li>
+        <li><a href="https://shop.m5stack.com/products/m5stack-core2-esp32-iot-development-kit-v1-1?ref=7h30th3r0n3" target="_blank" rel="noopener noreferrer">👨🏽‍💻 M5Stack Core2</a></li>
+      </ul>
+    </section>
     <section class="tips-section">
   <h3>Tips & Tricks</h3>
   <div class="tips-list">
@@ -329,7 +329,9 @@
   </svg>
 </button>
 <script src="scripts.js" defer></script>
-<canvas id="matrix-canvas" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>
-<div id="hacker-cursor"></div>
-</body>
+<script src="accessibility.js" defer></script>
+    <canvas id="matrix-canvas" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999;"></canvas>
+    <div id="hacker-cursor"></div>
+    </main>
+  </body>
 </html>
