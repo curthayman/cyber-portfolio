@@ -842,8 +842,6 @@ function typeMatrix() {
 }
 typeMatrix();
 
-
-
   // Scroll to top
   window.scrollTo(0, 0);
 
