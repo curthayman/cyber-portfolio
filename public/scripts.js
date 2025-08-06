@@ -854,3 +854,54 @@ typeMatrix();
   updateThreatFeedShuffled();
   setInterval(updateThreatFeedShuffled, 5 * 60 * 1000);
 });
+  document.getElementById('drone-popup-trigger').onclick = function(e) {
+    e.preventDefault();
+    document.getElementById('drone-popup-modal').style.display = 'block';
+  };
+  document.getElementById('drone-popup-close').onclick = function() {
+    document.getElementById('drone-popup-modal').style.display = 'none';
+  };
+  window.onclick = function(event) {
+    var modal = document.getElementById('drone-popup-modal');
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  };
+
+  // Drone modal code (already present)
+  document.getElementById('drone-popup-trigger').onclick = function(e) {
+    e.preventDefault();
+    document.getElementById('drone-popup-modal').style.display = 'block';
+  };
+  document.getElementById('drone-popup-close').onclick = function() {
+    document.getElementById('drone-popup-modal').style.display = 'none';
+  };
+  window.onclick = function(event) {
+    var droneModal = document.getElementById('drone-popup-modal');
+    var lightboxModal = document.getElementById('lightbox-modal');
+    if (event.target == droneModal) {
+      droneModal.style.display = 'none';
+    }
+    if (event.target == lightboxModal) {
+      lightboxModal.style.display = 'none';
+    }
+  };
+
+  // Lightbox code
+  var droneImages = document.querySelectorAll('.drone-images img');
+  var lightboxModal = document.getElementById('lightbox-modal');
+  var lightboxImg = document.getElementById('lightbox-img');
+  var lightboxClose = document.getElementById('lightbox-close');
+
+  droneImages.forEach(function(img) {
+    img.onclick = function() {
+      lightboxImg.src = this.src;
+      lightboxModal.style.display = 'flex';
+    };
+  });
+
+  lightboxClose.onclick = function() {
+    lightboxModal.style.display = 'none';
+    lightboxImg.src = '';
+  };
+

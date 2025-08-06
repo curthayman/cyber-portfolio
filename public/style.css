@@ -877,4 +877,81 @@ body, html {
     padding: 0.5em;
   }
 }
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background: #181f1f;
+  margin: 5% auto;
+  padding: 2em;
+  border-radius: 10px;
+  border-left: 4px solid #00ff99;
+  width: 90%;
+  max-width: 600px;
+  color: #fff;
+  box-shadow: 0 2px 16px #00ff9940;
+  text-align: center;
+}
+
+.close {
+  color: #00ff99;
+  float: right;
+  font-size: 2em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: -1em;
+  margin-right: -1em;
+}
+
+.drone-images {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin-top: 1.5em;
+  flex-wrap: wrap;
+}
+
+.drone-images img {
+  border-radius: 8px;
+  box-shadow: 0 0 8px #00ff9955;
+  width: 30%;
+  min-width: 120px;
+  max-width: 180px;
+  height: auto;
+  background: #222;
+}
+#lightbox-modal {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#lightbox-modal .lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 0 24px #00ff9955;
+  margin: auto;
+  display: block;
+  background: #222;
+}
+
+#lightbox-modal .close {
+  position: absolute;
+  top: 2%;
+  right: 4%;
+  color: #00ff99;
+  font-size: 2.5em;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+}
 
