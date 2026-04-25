@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var contactModalClose = document.getElementById('contactModalClose');
   if (hireBanner && contactModal && contactModalClose) {
     var openModal = function() {
-      contactModal.style.display = 'block';
+      contactModal.style.display = 'flex';
       contactModalClose.focus();
     };
     hireBanner.addEventListener('click', openModal);

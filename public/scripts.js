@@ -233,10 +233,10 @@ const cliForm = document.getElementById('cliForm');
 const cliInput = document.getElementById('cliInput');
 
 const commands = {
-  help: "Available commands: help, rm -rf /, selfdestruct, about, clear, certs, social, exit, uptime, fortune, matrix, sudo make me a sandwich, weather, nmap, hint, submit <flag>",
+  help: "Available commands: help, rm -rf /, selfdestruct, about, clear, certs, social, exit, uptime, fortune, matrix, sudo make me a sandwich, weather, nmap, hint, wdgwars, submit <flag>",
   about: "Curt Hayman, CEH | Penetration Tester. 15+ years WordPress 7+ years CyberSecurity, drone pilot, sneakerhead.",
   certs: "CEH, Digital Forensics, Bug Bounty, Master Ethical Hacker, Master Wifi Hacking, Wireshark.",
-  social: "Droners: <a href='https://droners.com/curtthecoder' target='_blank'>Profile</a> | Facebook: <a href='https://www.facebook.com/groups/undergroundhiphoponly' target='_blank'>UGHHO</a> | Facebook: <a href='https://www.facebook.com/imcurthayman/' target='_blank'>Personal</a>",
+  social: "Droners: <a href='https://www.pixeldepot.com/curtthecoder' target='_blank'>Profile</a> | Facebook: <a href='https://www.facebook.com/groups/undergroundhiphoponly' target='_blank'>UGHHO</a> | Facebook: <a href='https://www.facebook.com/imcurthayman/' target='_blank'>Personal</a>",
   exit: "Session ended. Refresh to restart.",
   weather: "Cyber Weather Report: Packet storms expected. 0-day showers in the afternoon. Phishing attempts: 42%. Stay patched and carry an umbrella! ☔️",
   hint: "Hint: Sometimes the best secrets are hidden in plain sight (or in the source code)..."
@@ -361,6 +361,23 @@ function cliSubmitHandler(e) {
       printLine("Nmap done: 1 IP address (1 host up) scanned in 0.12 seconds");
     }, 600);
   }
+  else if (cmd === 'wdgwars') {
+    printLine('<span style="color:var(--accent);">[WDGoWars]</span> Connecting to wdgwars.pl...', true);
+    setTimeout(() => {
+      printLine('<span style="color:var(--accent);">[WDGoWars]</span> User    : <span style="color:#22c55e;">curtthecoder</span>', true);
+      printLine('<span style="color:var(--accent);">[WDGoWars]</span> Platform: Watch Dogs Go Wars', true);
+      printLine('<span style="color:var(--accent);">[WDGoWars]</span> Game    : Watch Dogs Go on uConsole', true);
+      printLine('<span style="color:var(--accent);">[WDGoWars]</span> Mode    : Passive Wardriving · Territory War', true);
+      printLine('<span style="color:var(--accent);">[WDGoWars]</span> Gear    : Biscuit Pro · Cardputer Adv · WiFi Pager', true);
+      printLine('<span style="color:var(--accent);">[WDGoWars]</span> Status  : <span style="color:#22c55e;">ACTIVE ●</span>', true);
+      var tot  = document.getElementById('wdgTotal');
+      var wifi = document.getElementById('wdgWifi');
+      var ble  = document.getElementById('wdgBle');
+      var adsb = document.getElementById('wdgAdsb');
+      printLine('<span style="color:var(--accent);">[WDGoWars]</span> Total: ' + (tot ? tot.textContent : '—') + '  |  WiFi: ' + (wifi ? wifi.textContent : '—') + '  |  BLE: ' + (ble ? ble.textContent : '—') + '  |  ADS-B: ' + (adsb ? adsb.textContent : '0'), true);
+      printLine('<span style="color:var(--accent);">[WDGoWars]</span> <a href="https://wdgwars.pl" target="_blank" style="color:var(--link);">→ wdgwars.pl</a>', true);
+    }, 450);
+  }
   else if (cmd.startsWith("submit ")) {
     // Accept the flag in any case (case-insinsensitive)
     const submittedFlag = rawInput.slice(7).trim();
@@ -388,7 +405,7 @@ function fetchGitHubProjects() {
     .then(response => response.json())
     .then(repos => {
       projectsList.innerHTML = "";
-      repos.slice(0, 5).forEach(repo => {
+      repos.filter(repo => repo.name !== username).slice(0, 5).forEach(repo => {
         const li = document.createElement('li');
         li.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>
           <span class="desc">${repo.description ? repo.description : ''}</span>`;
@@ -428,12 +445,13 @@ function scrollCerts(amount) {
 function animateStats() {
   document.querySelectorAll('.stat-number').forEach(stat => {
     const target = +stat.getAttribute('data-target');
+    const suffix = stat.getAttribute('data-suffix') || '';
     let count = 0;
     const increment = Math.ceil(target / 60);
     function update() {
       count += increment;
       if (count > target) count = target;
-      stat.textContent = count;
+      stat.textContent = count + (count === target ? suffix : '');
       if (count < target) {
         requestAnimationFrame(update);
       }
@@ -796,11 +814,11 @@ if (isMobileDevice()) {
 
 // --- Unified DOMContentLoaded Initialization ---
 window.addEventListener('DOMContentLoaded', function() {
-  // Loader animation
+  // Loader animation — only runs if the loader is actually visible
   const loader = document.getElementById('matrixLoader');
   const loadingText = document.getElementById('matrixLoadingText');
 
-// Pick a random boot message for the loader
+if (loader && loader.style.display !== 'none') {
 // Hide the hacker cursor during loading
 document.getElementById('hacker-cursor').style.display = 'none';
 
@@ -841,9 +859,7 @@ function typeMatrix() {
   }
 }
 typeMatrix();
-
-  // Scroll to top
-  window.scrollTo(0, 0);
+} // end loader visibility guard
 
   // Initialize all features
   setMotd();
@@ -853,7 +869,76 @@ typeMatrix();
   animateStats();
   updateThreatFeedShuffled();
   setInterval(updateThreatFeedShuffled, 5 * 60 * 1000);
+  initTicker();
+  initVisitorCounter();
+  initPayloadCarousel();
 });
+
+// --- Payload Carousel ---
+function initPayloadCarousel() {
+  const track = document.querySelector('.payload-carousel-track');
+  const cards = document.querySelectorAll('.payload-carousel-track .payload-card');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const prevBtn = document.querySelector('.carousel-prev');
+  const nextBtn = document.querySelector('.carousel-next');
+  const currentEl = document.getElementById('payloadCurrent');
+  const wrapper = document.querySelector('.payload-carousel-wrapper');
+
+  if (!track || !cards.length) return;
+
+  let current = 0;
+  let autoInterval;
+  let isPaused = false;
+
+  function goTo(index) {
+    dots[current].classList.remove('active');
+    cards[current].setAttribute('aria-hidden', 'true');
+    current = ((index % cards.length) + cards.length) % cards.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots[current].classList.add('active');
+    cards[current].removeAttribute('aria-hidden');
+    if (currentEl) currentEl.textContent = current + 1;
+  }
+
+  function startAuto() {
+    clearInterval(autoInterval);
+    if (!isPaused) {
+      autoInterval = setInterval(() => goTo(current + 1), 5500);
+    }
+  }
+  function resetAuto() {
+    clearInterval(autoInterval);
+    if (!isPaused) startAuto();
+  }
+
+  prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { goTo(i); resetAuto(); });
+  });
+
+  wrapper.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { goTo(current - 1); resetAuto(); }
+    if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
+  });
+
+  const section = document.querySelector('.payloads-section');
+  if (section) {
+    section.addEventListener('mouseenter', () => { isPaused = true; clearInterval(autoInterval); });
+    section.addEventListener('mouseleave', () => { isPaused = false; startAuto(); });
+  }
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
+  }, { passive: true });
+
+  startAuto();
+}
   document.getElementById('drone-popup-trigger').onclick = function(e) {
     e.preventDefault();
     document.getElementById('drone-popup-modal').style.display = 'block';
@@ -904,4 +989,125 @@ typeMatrix();
     lightboxModal.style.display = 'none';
     lightboxImg.src = '';
   };
+
+// --- Currently Working On Ticker ---
+function initTicker() {
+  const items = document.querySelectorAll('.ticker-item');
+  if (!items.length) return;
+  let current = 0;
+  setInterval(function() {
+    items[current].classList.remove('active');
+    items[current].classList.add('exit-up');
+    setTimeout(function() {
+      items[current].classList.remove('exit-up');
+      current = (current + 1) % items.length;
+      items[current].classList.add('active');
+    }, 500);
+  }, 4000);
+}
+
+// --- Visitor Counter ---
+function initVisitorCounter() {
+  var counterEl = document.getElementById('visitorCount');
+  var counterLine = document.getElementById('visitorCounterLine');
+  if (!counterEl) return;
+
+  // Show cached count immediately while the API loads
+  var cached = localStorage.getItem('vc_count');
+  if (cached) counterEl.textContent = Number(cached).toLocaleString();
+
+  fetch('https://api.counterapi.dev/v1/iamcurthayman-portfolio/visits/up')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      var count = data && (data.count !== undefined ? data.count : data.value);
+      var num = Number(count);
+      if (!isNaN(num) && num > 0) {
+        localStorage.setItem('vc_count', num);
+        animateCounter(counterEl, num);
+      }
+    })
+    .catch(function() {
+      // API failed — hide counter if no cache exists
+      if (!cached && counterLine) counterLine.style.display = 'none';
+    });
+}
+
+
+function animateCounter(el, target) {
+  var start = Math.max(0, target - 30);
+  var current = start;
+  var step = Math.ceil((target - start) / 40);
+  function tick() {
+    current += step;
+    if (current >= target) {
+      el.textContent = target.toLocaleString();
+      return;
+    }
+    el.textContent = current.toLocaleString();
+    requestAnimationFrame(tick);
+  }
+  tick();
+}
+
+// WDGoWars live stats
+(function () {
+  function setText(id, val) {
+    var el = document.getElementById(id);
+    if (el && val != null) el.textContent = val;
+  }
+  function formatBadge(b) {
+    return b.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+  function formatDate(iso) {
+    if (!iso) return null;
+    var parts = iso.split('-');
+    var d = new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2]));
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+  }
+
+  function fetchWdgStats() {
+    fetch('/api/wdgwars')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.error) return; // API returned an error — keep current values
+
+        var s = d.stats || {};
+
+        // Identity
+        setText('wdgGang',    d.gang);
+        setText('wdgCountry', d.country);
+        setText('wdgJoined',  formatDate(d.joined));
+
+        // Stats
+        setText('wdgTotal', s.total    != null ? Number(s.total).toLocaleString()    : null);
+        setText('wdgWifi',  s.wifi     != null ? Number(s.wifi).toLocaleString()     : null);
+        setText('wdgBle',   s.ble      != null ? Number(s.ble).toLocaleString()      : null);
+        setText('wdgAdsb',  s.aircraft != null ? Number(s.aircraft).toLocaleString() : null);
+        setText('wdgMesh',  s.mesh     != null ? Number(s.mesh).toLocaleString()     : null);
+
+        // Recent activity
+        setText('wdgToday', d.recent_today != null ? Number(d.recent_today).toLocaleString() : null);
+        setText('wdg7d',    d.recent_7d   != null ? Number(d.recent_7d).toLocaleString()    : null);
+
+        // Last updated timestamp
+        setText('wdgLastUpdated', 'Last updated: ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+
+        // Badges — rebuild the container
+        var badgeContainer = document.getElementById('wdgBadges');
+        if (badgeContainer && Array.isArray(d.badges) && d.badges.length) {
+          badgeContainer.innerHTML = '';
+          d.badges.forEach(function (b) {
+            var span = document.createElement('span');
+            span.className = 'wd-badge';
+            span.textContent = formatBadge(b);
+            badgeContainer.appendChild(span);
+          });
+        }
+      })
+      .catch(function () { /* keep current values on network error */ });
+  }
+
+  fetchWdgStats();
+  setInterval(fetchWdgStats, 5 * 60 * 1000); // refresh every 5 minutes
+})();
 

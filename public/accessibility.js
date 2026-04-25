@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var contactModalClose = document.getElementById('contactModalClose');
   if (contactBtn && contactModal && contactModalClose) {
     contactBtn.addEventListener('click', function() {
-      contactModal.style.display = 'block';
+      contactModal.style.display = 'flex';
       contactModalClose.focus();
     });
     contactModalClose.addEventListener('click', function() {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
       contactBtn.focus();
     });
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && contactModal.style.display === 'block') {
+      if (e.key === 'Escape' && contactModal.style.display === 'flex') {
         contactModal.style.display = 'none';
         contactBtn.focus();
       }

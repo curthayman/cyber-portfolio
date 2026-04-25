@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Curt Hayman, CEH | Penetration Tester &amp; Ethical Hacker &amp; WordPress Administrator Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Curt Hayman, CEH | Penetration Tester &amp; Ethical Hacker Portfolio</title>
   <meta content="Curt Hayman,CEH | Penetration Tester &amp; Ethical Hacker Portfolio" name="title">
   <meta content="Curt Hayman,CEH is a Certified Ethical Hacker and Penetration Tester with 15+ years of experience in cybersecurity, WordPress, and digital forensics. Available for freelance and consulting projects." name="description">
   <meta content="website" property="og:type">
@@ -13,78 +12,117 @@
   <meta content="Curt Hayman,CEH is a Certified Ethical Hacker and Penetration Tester with 15+ years of experience in cybersecurity, WordPress, and digital forensics. Available for freelance and consulting projects." property="og:description">
   <meta content="https://iamcurthayman.com/curt-profile-og.jpg" property="og:image">
   <meta content="summary_large_image" property="twitter:card">
-  <meta content="https://iamcurthayman.com/" property="twitter:url">
-  <meta content="Curt Hayman,CEH | Penetration Tester &amp; Ethical Hacker Portfolio" property="twitter:title">
-  <meta content="Curt Hayman,CEH is a Certified Ethical Hacker and Penetration Tester with 15+ years of experience in cybersecurity, WordPress, and digital forensics. Available for freelance and consulting projects." property="twitter:description">
-  <meta content="https://iamcurthayman.com/curt-profile-og.jpg" property="twitter:image">
   <link rel="canonical" href="https://iamcurthayman.com/">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <meta content="Curt Hayman,CEH, penetration tester, ethical hacker, cybersecurity, WordPress security, digital forensics, bug bounty, drone pilot, Baltimore, freelance, Delaware, Maryland, Website Design, Development consulting" name="keywords">
-  <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Fira+Code&amp;display=swap">
-  <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css">
-  <script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
+  <meta content="Curt Hayman,CEH, penetration tester, ethical hacker, cybersecurity, WordPress security, digital forensics, bug bounty, drone pilot, Baltimore, freelance" name="keywords">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Apply saved theme before render to avoid flash -->
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
 </head>
 <body>
-  <div id="matrixLoader">
-    <div class="matrix-loader-content">
-      <pre id="matrixLoadingText"></pre>
-    </div>
-  </div>
   <main>
-    <div class="bg-overlay"></div>
+
+    <!-- ===== HEADER ===== -->
     <header>
-      <h1>Curt Hayman,CEH | <span id="glitchTitle">Penetration Tester</span></h1>
-      <div id="hireBanner" aria-label="Contact Me (Available for projects)" role="button" tabindex="0">Available for Projects!</div>
+      <div class="header-inner">
+        <div class="header-text">
+          <h1>Curt Hayman, CEH</h1>
+          <p class="subtitle">Penetration Tester &bull; Ethical Hacker &bull; WordPress Specialist</p>
+        </div>
+        <div class="header-actions">
+          <div id="hireBanner" role="button" tabindex="0" aria-label="Available for projects">Available for Projects</div>
+          <button id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <span id="themeIcon">☀</span>
+            <span id="themeLabel">Light</span>
+          </button>
+        </div>
+      </div>
     </header>
-    <button class="contact-btn" id="contactBtn" aria-label="Contact Me">Contact Me</button>
+
+    <!-- ===== TICKER ===== -->
+    <div class="ticker-bar">
+      <div class="ticker-inner">
+        <span class="ticker-label">Always Working on</span>
+        <div class="ticker-content">
+          <span class="ticker-item active">Building Pager Payloads for Hak5's Pager</span>
+          <span class="ticker-item">Securing Networks/Websites</span>
+          <span class="ticker-item">Exploring Drone Forensics Techniques</span>
+          <span class="ticker-item">Bug Bounty Hunting</span>
+          <span class="ticker-item">Growing the Underground Hip Hop community</span>
+          <span class="ticker-item">Pen Testing to Keep Companies Safe</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CONTACT ===== -->
+    <div class="contact-btn-wrap">
+      <button class="contact-btn" id="contactBtn" aria-label="Contact Me">Get In Touch</button>
+    </div>
     <div class="contact-modal" id="contactModal">
       <div class="contact-modal-content">
-        <button class="contact-modal-close" id="contactModalClose" aria-label="Close Contact Modal">×</button>
-        <h2>Contact Curt Hayman,CEH</h2>
-        <p><strong>Email:</strong> <a href="mailto:curtthecoder@proton.me">curtthecoder@proton.me</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+3025729020">(302) 572-9020</a></p>
+        <button class="contact-modal-close" id="contactModalClose" aria-label="Close">×</button>
+        <h2>Contact Curt Hayman, CEH</h2>
+        <p><strong>Email:</strong> <a id="contactEmail" href="#">[loading]</a></p>
       </div>
     </div>
+
+    <!-- ===== BIO ===== -->
     <section id="bio-section">
-      <div class="terminal-section">
-        <div class="terminal-line">I am a seasoned professional in the realm of 🔐cybersecurity... 6+ years.</div>
-        <div class="terminal-line">
-  I also have been flying drones lately.
-  <a href="#" id="drone-popup-trigger">Click here to see a few shots</a>, you can click them to make them larger.
-</div>
-        <div class="terminal-line">My expertise extends beyond the cyber realm. With over 15 years of WordPress Administration mastery...</div>
-        <div class="terminal-line">Outside of work, I’m a dedicated family man. Love chillin with my <a target="_blank" rel="noopener noreferrer" href="//www.iamangiehayman.com">Wifey</a>. On my <a target="_blank" href="//www.facebook.com/groups/undergroundhiphoponly">Underground Hip Hop ONLY Facebook Group</a>, I have 39K members strong!</div>
-        <div class="terminal-line">Love plants 🪴, and gardening.</div>
-        <div class="terminal-line">It's easter egg 🪺 surprises all through this site, so Enjoy! Be Nosey!</div>
-        <div class="terminal-line">Oh — and I’m a lifelong <strong>Sneaker Head</strong> 👟.</div>
-        <div class="terminal-line">I am also the President of <a target="_blank" rel="noopener noreferrer" href="//haytreewebservices.com">HayTree Web Services</a>.</div>
+      <span class="section-label">About Me</span>
+      <div class="bio-list">
+        <div class="bio-item">
+          <span class="bio-icon">🔐</span>
+          <span>Seasoned professional in cybersecurity with 8+ years in the field and 15+ years of WordPress Administration mastery.</span>
+        </div>
+        <div class="bio-item">
+          <span class="bio-icon">🚁</span>
+          <span>Also been flying drones lately. <a href="https://www.pixeldepot.com/curtthecoder" target="_blank" rel="noopener noreferrer">Click here to see a few shots</a></span>
+        </div>
+        <div class="bio-item">
+          <span class="bio-icon">👨‍👩‍👧</span>
+          <span>Dedicated family man. Love chillin with my <a href="https://www.iamangiehayman.com" target="_blank" rel="noopener noreferrer">Wifey</a>. Running the <a href="https://www.facebook.com/groups/undergroundhiphoponly" target="_blank" rel="noopener noreferrer">Underground Hip Hop ONLY</a> Facebook group, 40K members strong.</span>
+        </div>
+        <div class="bio-item">
+          <span class="bio-icon">🪴</span>
+          <span>Love plants and gardening. Writing helpful docs and writeups on <a href="https://medium.com/@curthaymanceh" target="_blank" rel="noopener noreferrer">Medium</a> and <a href="https://substack.com/@curtthecoder" target="_blank" rel="noopener noreferrer">Substack</a>.</span>
+        </div>
+        <div class="bio-item">
+          <span class="bio-icon">👟</span>
+          <span>Lifelong <strong>Sneaker Head</strong>. President of <a href="https://haytreewebservices.com" target="_blank" rel="noopener noreferrer">HayTree Web Services</a>.</span>
+        </div>
+        <div class="bio-item">
+          <span class="bio-icon">🪺</span>
+          <span>Easter egg surprises all through this site. Enjoy! Be nosey!</span>
+        </div>
       </div>
-        <div id="drone-popup-modal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="drone-popup-close">&times;</span>
-    <h3>Drone Shots</h3>
-    <div class="drone-images">
-      <img src="images/dji_fly_20250717_165306_414_1752883961632_photo_optimized.jpg" alt="Poconos Mountain">
-      <img src="images/dji_fly_20250717_165320_416_1752883960506_photo_optimized.jpg" alt="Poconos Mountain 2">
-      <img src="images/dji_fly_20250803_125658_435_1754240032376_photo_optimized.jpg" alt="Frederica, DE">
-    </div>
-  </div>
-</div>
-        <div id="lightbox-modal" class="modal">
-  <span class="close" id="lightbox-close">&times;</span>
-  <img id="lightbox-img" src="" alt="Large Drone Shot" class="lightbox-img">
-</div>
 
-
-    </section>
-    <section class="skills-section">
-      <h3>Skills &amp; Tech Stack</h3>
+    <!-- ===== SKILLS ===== -->
+    <section>
+      <span class="section-label">Skills &amp; Tech Stack</span>
       <div class="skills-badges">
         <span class="skill-badge">Python</span>
         <span class="skill-badge">PHP</span>
         <span class="skill-badge">HTML5</span>
         <span class="skill-badge">CSS3</span>
         <span class="skill-badge">Bash</span>
+        <span class="skill-badge">DuckyScript</span>
         <span class="skill-badge">Linux</span>
         <span class="skill-badge">Kali Linux</span>
         <span class="skill-badge">CSI Linux</span>
@@ -96,18 +134,20 @@
         <span class="skill-badge">Digital Forensics</span>
         <span class="skill-badge">Drone Forensics</span>
         <span class="skill-badge">Streamlit</span>
-        <span class="skill-badge">And More!!</span>
+        <span class="skill-badge">And More</span>
       </div>
     </section>
-    <section class="stats-section">
-      <h3>Stats at a Glance</h3>
+
+    <!-- ===== STATS ===== -->
+    <section>
+      <span class="section-label">Stats at a Glance</span>
       <div class="stats-cards">
         <div class="stat-card">
           <span class="stat-number" data-target="15">0</span>
           <span class="stat-label">Years Experience</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number" data-target="120">0</span>
+          <span class="stat-number" data-target="120" data-suffix="ish">0</span>
           <span class="stat-label">Websites Secured</span>
         </div>
         <div class="stat-card">
@@ -120,21 +160,25 @@
         </div>
       </div>
     </section>
-    <section class="projects-section">
-      <h3>Recent Projects from <a target="_blank" href="//github.com/curthayman">GitHub</a></h3>
+
+    <!-- ===== PROJECTS ===== -->
+    <section>
+      <span class="section-label">Recent Projects <a href="https://github.com/curthayman/" target="_blank" rel="noopener noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;letter-spacing:0.08em;color:var(--text);text-decoration:none;background:var(--bg-subtle);border:1px solid var(--border);border-radius:5px;padding:0.15em 0.55em;">⌥ github / curthayman</a></span>
       <ul class="projects-list" id="githubProjects">
         <li>Loading projects...</li>
       </ul>
     </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
     <section>
-      <h3>Certifications</h3>
+      <span class="section-label">Certifications</span>
       <div class="cert-section-wrapper">
         <button class="scroll-btn" id="scrollLeftBtn" aria-label="Scroll certifications left">←</button>
         <div class="badges-wrapper" id="certScroll">
-          <div class="badge" title="Issued: Aug 29, 2025\nExpires: Aug 29, 2026" onclick="expandImage('images/certificate-701030761.jpeg')">
+          <div class="badge" title="Issued: Aug 29, 2025 | Expires:Aug 29, 2026" onclick="expandImage('images/certificate-701030761.jpeg')">
             <img class="cert-img" loading="lazy" src="images/certificate-701030761.jpeg" alt="Advanced Prompt Hacking">
           </div>
-            <div class="badge" title="Issued: July 16, 2023\nExpires: July 15, 2026" onclick="expandImage('images/certificateech.png')">
+          <div class="badge" title="Issued: July 16, 2023 | Expires:July 15, 2026" onclick="expandImage('images/certificateech.png')">
             <img class="cert-img" loading="lazy" src="images/certificateech.png" alt="CEH Certificate">
           </div>
           <div class="badge" title="Issued: Jan 1, 2024" onclick="expandImage('images/dfecertificate.png')">
@@ -149,127 +193,415 @@
           <div class="badge" title="Issued: Feb 28, 2024" onclick="expandImage('images/masterwifihacking.png')">
             <img class="cert-img" loading="lazy" src="images/masterwifihacking.png" alt="Master Wifi Hacking Certificate">
           </div>
-          <div class="badge" title="Issued: Oct 8, 2023\nExpires: Oct 7, 2026" onclick="expandImage('images/wireshark-certificate.jpeg')">
+          <div class="badge" title="Issued: Oct 8, 2023 | Expires:Oct 7, 2026" onclick="expandImage('images/wireshark-certificate.jpeg')">
             <img class="cert-img" loading="lazy" src="images/wireshark-certificate.jpeg" alt="WireShark Certificate">
           </div>
         </div>
         <button class="scroll-btn" id="scrollRightBtn" aria-label="Scroll certifications right">→</button>
       </div>
     </section>
-    <section class="testimonials-section">
-      <h3>Testimonials</h3>
+
+    <!-- Cert modal -->
+    <div class="modal" id="certModal" role="dialog" aria-modal="true">
+      <span class="modal-close" id="certModalClose" aria-label="Close">×</span>
+      <img class="modal-content" id="modalImage" alt="Certificate enlarged preview">
+    </div>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section>
+      <span class="section-label">Testimonials</span>
       <div class="testimonials-list">
         <div class="testimonial">
-          <p>“Curt consistently demonstrated professionalism, technical expertise, and a commitment to keeping our clients’ websites secure and running smoothly. His attention to detail and proactive approach ensured smooth operations for our digital platforms.”</p>
-          <div class="testimonial-author">— Jeff Theis, Director of Project Management, <a target="_blank" rel="noopener noreferrer" href="//215marketing.com/"> 215 Marketing</a></div>
+          <p>"Curt consistently demonstrated professionalism, technical expertise, and a commitment to keeping our clients' websites secure and running smoothly. His attention to detail and proactive approach ensured smooth operations for our digital platforms."</p>
+          <div class="testimonial-author">Jeff Theis, Director of Project Management, <a href="https://215marketing.com/" target="_blank" rel="noopener noreferrer">215 Marketing</a></div>
         </div>
         <div class="testimonial">
-          <p>“Curt was knowledgeable about what my site needed and how to keep it performing at its best without outside interferences. Thank you <a target="_blank" rel="noopener noreferrer" href="//haytreewebservices.com">HayTree Web Services.</a>”</p>
-          <div class="testimonial-author">— Mark Wilson, Bonner Private Security Firm</div>
+          <p>"Curt was knowledgeable about what my site needed and how to keep it performing at its best without outside interferences. Thank you <a href="https://haytreewebservices.com" target="_blank" rel="noopener noreferrer">HayTree Web Services.</a>"</p>
+          <div class="testimonial-author">Mark Wilson, Bonner Private Security Firm</div>
         </div>
       </div>
     </section>
-    <div class="modal" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
-      <span class="modal-close" id="certModalClose" aria-label="Close Certificate Modal">×</span>
-      <img class="modal-content" id="modalImage" alt="Certificate enlarged preview">
-    </div>
+
+    <!-- ===== COMMANDS ===== -->
     <div class="commands-section">
-      <h3>My Favorite Commands</h3>
+      <span class="section-label">Favorite Commands</span>
       <div class="command-group">
         <div class="cmd-label">Get memory statistics, run:</div>
         <div class="command-terminal">
           <div class="typed-line" id="line1"></div>
-          <button class="copy-btn" aria-label="Copy memory statistics command" data-copy="line1">Copy</button>
+          <button class="copy-btn" aria-label="Copy" data-copy="line1">Copy</button>
         </div>
       </div>
       <div class="command-group">
         <div class="cmd-label">Cache Flush on Mac, run:</div>
         <div class="command-terminal">
           <div class="typed-line" id="line2"></div>
-          <button class="copy-btn" aria-label="Copy cache flush command" data-copy="line2">Copy</button>
+          <button class="copy-btn" aria-label="Copy" data-copy="line2">Copy</button>
         </div>
       </div>
       <div class="command-group">
         <div class="cmd-label">Find Vulnerable Ports, run:</div>
         <div class="command-terminal">
           <div class="typed-line" id="line3"></div>
-          <button class="copy-btn" aria-label="Copy vulnerable ports command" data-copy="line3">Copy</button>
+          <button class="copy-btn" aria-label="Copy" data-copy="line3">Copy</button>
         </div>
       </div>
       <div class="command-group">
         <div class="cmd-label">Need more information on a command?</div>
         <div class="command-terminal">
           <div class="typed-line" id="line4"></div>
-          <button class="copy-btn" aria-label="Copy help command" data-copy="line4">Copy</button>
+          <button class="copy-btn" aria-label="Copy" data-copy="line4">Copy</button>
         </div>
       </div>
       <div class="command-group">
         <div class="cmd-label">Generate a strong random password, run:</div>
         <div class="command-terminal">
           <div class="typed-line" id="line5"></div>
-          <button class="copy-btn" aria-label="Copy password generation command" data-copy="line5">Copy</button>
+          <button class="copy-btn" aria-label="Copy" data-copy="line5">Copy</button>
         </div>
       </div>
     </div>
-    <!-- GADGETS SECTION -->
-    <section class="gadgets-section">
-      <h3>Favorite Hacking Toys</h3>
+
+    <!-- ===== GADGETS ===== -->
+    <section>
+      <span class="section-label">Favorite Hacking Toys</span>
       <ul class="gadgets-list">
-        <li><a target="_blank" rel="noopener noreferrer" href="//shop.flipperzero.one/">🐬 Flipper Zero</a></li>
-        <li><a target="_blank" rel="noopener noreferrer" href="//rabbit-labs.com/product/the-phantom-by-rabbit-labs/?v=0b3b97fa6688">👻 The Phantom</a></li>
-        <li><a target="_blank" rel="noopener noreferrer" href="//hak5.org/products/usb-rubber-ducky">🦆 Rubber Ducky</a></li>
-        <li><a target="_blank" rel="noopener noreferrer" href="//shop.flipperzero.one/products/wifi-devboard">📶 WiFi Dev Board</a></li>
-        <li><a target="_blank" rel="noopener noreferrer" href="//medicatusb.com/">💉 MediCat USB</a></li>
-        <li><a target="_blank" rel="noopener noreferrer" href="//shop.m5stack.com/products/m5stack-core2-esp32-iot-development-kit-v1-1?ref=7h30th3r0n3">👨🏽‍💻 M5Stack Core2</a></li>
-        <li><a target="_blank" rel="noopener noreferrer" href="https://shop.m5stack.com/products/m5stack-cardputer-with-m5stamps3-v1-1">💳 M5Stack Cardputer</a></li>
+        <li><a href="https://shop.hak5.org/products/pager/" target="_blank" rel="noopener noreferrer">📟 WiFi Pineapple Pager</a></li>
+        <li><a href="https://shop.flipperzero.one/" target="_blank" rel="noopener noreferrer">🐬 Flipper Zero</a></li>
+        <li><a href="https://rabbit-labs.com/product/the-phantom-by-rabbit-labs/?v=0b3b97fa6688" target="_blank" rel="noopener noreferrer">👻 The Phantom</a></li>
+        <li><a href="https://hak5.org/products/usb-rubber-ducky" target="_blank" rel="noopener noreferrer">🦆 Rubber Ducky</a></li>
+        <li><a href="https://shop.flipperzero.one/products/wifi-devboard" target="_blank" rel="noopener noreferrer">📶 WiFi Dev Board</a></li>
+        <li><a href="https://medicatusb.com/" target="_blank" rel="noopener noreferrer">💉 MediCat USB</a></li>
+        <li><a href="https://shop.m5stack.com/products/m5stack-core2-esp32-iot-development-kit-v1-1?ref=7h30th3r0n3" target="_blank" rel="noopener noreferrer">👨🏽‍💻 M5Stack Core2</a></li>
+        <li><a href="https://shop.m5stack.com/products/m5stack-cardputer-adv-version-esp32-s3" target="_blank" rel="noopener noreferrer">💳 M5Stack Cardputer Adv</a></li>
+        <li><a href="https://biscuitshop.us/pages/biscuit-pro" target="_blank" rel="noopener noreferrer">🍪 Biscuit Pro</a></li>
       </ul>
     </section>
-    <!-- END GADGETS SECTION -->
-    <section class="tips-section">
-      <h3>Tips &amp; Tricks</h3>
+
+    <!-- ===== WARDRIVING ===== -->
+    <section id="wardriving-section">
+      <span class="section-label">Wardriving</span>
+
+      <div class="wd-grid" style="margin-bottom:1rem;">
+        <!-- Stats -->
+        <div>
+          <div class="wd-stats">
+            <div class="wd-stat">
+              <span class="wd-stat-number">250k+</span>
+              <span class="wd-stat-label">Networks Found</span>
+            </div>
+            <div class="wd-stat">
+              <span class="wd-stat-number">6+</span>
+              <span class="wd-stat-label">States Driven</span>
+            </div>
+            <div class="wd-stat">
+              <span class="wd-stat-number">12+</span>
+              <span class="wd-stat-label">Cities Covered</span>
+            </div>
+            <div class="wd-stat">
+              <span class="wd-stat-number">2.4/5</span>
+              <span class="wd-stat-label">GHz Bands</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passive scan display -->
+        <div class="wd-scan-panel">
+          <div class="wd-scan-header">
+            <span class="wd-scan-title">PASSIVE SCAN · LIVE</span>
+            <span class="wd-scan-dot"></span>
+          </div>
+          <div class="wd-scan-body">
+            <div class="wd-scan-list" id="wdScanList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WiGLE badge -->
+      <div class="wd-wigle" style="margin-bottom:1rem;">
+        <a href="https://wigle.net" target="_blank" rel="noopener noreferrer" aria-label="WiGLE Profile">
+          <img src="https://wigle.net/bi/d0BZu70jc8rqrWWfxJp9yQ.png" alt="WiGLE Statistics Badge">
+        </a>
+        <div class="wd-wigle-text">
+          <strong>WiGLE.net</strong>
+          <p>Tracking wardrive submissions and global network discoveries.</p>
+        </div>
+      </div>
+
+      <!-- WDGoWars card -->
+      <div class="wd-wdgwars" style="margin-bottom:1rem;">
+        <div class="wd-wdgwars-header">
+          <span class="wd-wdgwars-logo">⚔️</span>
+          <div class="wd-wdgwars-info">
+            <strong>WDGoWars</strong>
+            <span class="wd-wdgwars-user">curtthecoder</span>
+          </div>
+          <div class="wd-wdgwars-status">
+            <span class="wd-wdgwars-dot"></span>
+            <span class="wd-wdgwars-status-text">ACTIVE</span>
+          </div>
+        </div>
+
+        <!-- Identity row -->
+        <div class="wd-wdgwars-meta">
+          <span class="wd-meta-item">🏴‍☠️ Gang: <strong id="wdgGang">Biscuits</strong></span>
+          <span class="wd-meta-sep">·</span>
+          <span class="wd-meta-item">🇺🇸 Country: <strong id="wdgCountry">US</strong></span>
+          <span class="wd-meta-sep">·</span>
+          <span class="wd-meta-item">📅 Joined: <strong id="wdgJoined">Apr 11, 2026</strong></span>
+        </div>
+
+        <!-- Main stats -->
+        <div class="wd-wdgwars-stats">
+          <div class="wd-wdgwars-stat">
+            <span class="wd-wdgwars-stat-val" id="wdgTotal">70,700</span>
+            <span class="wd-wdgwars-stat-label">Total</span>
+          </div>
+          <div class="wd-wdgwars-stat">
+            <span class="wd-wdgwars-stat-val" id="wdgWifi">44,628</span>
+            <span class="wd-wdgwars-stat-label">WiFi</span>
+          </div>
+          <div class="wd-wdgwars-stat">
+            <span class="wd-wdgwars-stat-val" id="wdgBle">26,072</span>
+            <span class="wd-wdgwars-stat-label">BLE</span>
+          </div>
+          <div class="wd-wdgwars-stat">
+            <span class="wd-wdgwars-stat-val" id="wdgAdsb">0</span>
+            <span class="wd-wdgwars-stat-label">Aircraft</span>
+          </div>
+          <div class="wd-wdgwars-stat">
+            <span class="wd-wdgwars-stat-val" id="wdgMesh">0</span>
+            <span class="wd-wdgwars-stat-label">Mesh</span>
+          </div>
+        </div>
+
+        <!-- Last updated -->
+        <p class="wd-last-updated" id="wdgLastUpdated">Updates every 5 min</p>
+
+        <!-- Recent activity -->
+        <div class="wd-wdgwars-recent">
+          <div class="wd-recent-item">
+            <span class="wd-recent-label">Today</span>
+            <span class="wd-recent-val" id="wdgToday">2,458</span>
+          </div>
+          <div class="wd-recent-divider"></div>
+          <div class="wd-recent-item">
+            <span class="wd-recent-label">Last 7 Days</span>
+            <span class="wd-recent-val" id="wdg7d">11,478</span>
+          </div>
+        </div>
+
+        <!-- Badges -->
+        <div class="wd-wdgwars-badges" id="wdgBadges">
+          <span class="wd-badge">First Blood</span>
+          <span class="wd-badge">WiFi 100</span>
+          <span class="wd-badge">WiFi 1K</span>
+          <span class="wd-badge">BLE 100</span>
+          <span class="wd-badge">BLE 1K</span>
+          <span class="wd-badge">WiGLE User</span>
+          <span class="wd-badge">Gang Member</span>
+          <span class="wd-badge">WiFi 10K</span>
+          <span class="wd-badge">BLE 10K</span>
+        </div>
+
+        <p class="wd-wdgwars-desc">Competitive wardriving RPG. Every AP I scan counts toward territory control. Gang vs. gang turf war on a live map.</p>
+        <a href="https://wdgwars.pl" target="_blank" rel="noopener noreferrer" class="wd-wdgwars-link">View WDGoWars Platform →</a>
+      </div>
+
+      <!-- Wardriving gear -->
+      <span class="section-label" style="margin-top:2rem;">Wardriving Gear</span>
+      <ul class="wd-gear-list">
+        <li><span>🍪 <a href="https://biscuitshop.us/pages/biscuit-pro" target="_blank" rel="noopener noreferrer">Biscuit Pro</a>: One of the best hacking gadgets out there right now! Shoutout to <a href="https://biscuitshop.us/collections/products" target="_blank" rel="noopener noreferrer">Hedge!</a></span></li>
+        <li><span>📻 <a href="https://lilygo.cc/products/t-dongle-c5" target="_blank"> T-Dongle C5</a>: compact USB dongle for wireless packet capture</span></li>
+        <li><span>🖥️ <a href="https://shop.m5stack.com/products/m5stack-cardputer-adv-version-esp32-s3" target="_blank" rel="noopener noreferrer"> Cardputer Adv</a>: portable M5Stack Cardputer for on-the-go wireless analysis</span></li>
+        <li><span>📱 Old Android phone: running NetAlly/WiGLE app for wardriving and AP logging</span></li>
+        <li><span>📟 <a href="https://shop.hak5.org/products/pager/" target="_blank" rel="noopener noreferrer">WiFi Pineapple Pager</a>: handshake capture and passive recon on the go</span></li>
+        <li><span>🗺️ <a href="https://wigle.net" target="_blank" rel="noopener noreferrer">WiGLE</a>: submitting and mapping all discoveries</span></li>
+        <li><span> ⚔️<a href="https://wdgwars.pl/" target="_blank" rel="noopener noreferrer">WDG Wars</a>: competitive wardriving leaderboard and turfwar platform</span></li>
+        <li><span>📶 <a href="https://wardrive.info/" target="_blank" rel="noopener noreferrer">Wardrive.info</a>: wardriving stats tracking and network upload portal</span></li>
+      </ul>
+    </section>
+
+    <!-- ===== PAGER PAYLOADS ===== -->
+    <section>
+      <span class="section-label">My Pager Payloads</span>
+      <p class="payloads-subtitle">Custom payloads I built for the <a href="https://shop.hak5.org/products/pager/" target="_blank" rel="noopener noreferrer">Hak5 WiFi Pineapple Pager</a></p>
+      <div class="payload-carousel-wrapper" tabindex="0" aria-label="Payload carousel">
+        <div class="payload-carousel-viewport">
+          <div class="payload-carousel-track">
+
+            <div class="payload-card" role="group" aria-label="Payload 1 of 4: Curly">
+              <div class="payload-terminal-bar">
+                <span class="payload-dot red"></span>
+                <span class="payload-dot yellow"></span>
+                <span class="payload-dot green"></span>
+                <span class="payload-terminal-title">Curly · payload.sh</span>
+              </div>
+              <div class="payload-terminal-body">
+                <div class="payload-prompt"><span class="prompt-symbol">$</span> cat README.md</div>
+                <div class="payload-field"><span class="field-label">PAYLOAD:</span> Curly</div>
+                <div class="payload-field"><span class="field-label">CATEGORY:</span> Reconnaissance</div>
+                <div class="payload-field"><span class="field-label">DESCRIPTION:</span> Automated recon payload for Website Vulnerability scanning and WordPress Detection. Uses curl for all findings, hence "Curly" 😉</div>
+                <div class="payload-status-line"><span class="field-label">STATUS:</span> <span class="payload-status deployed">DEPLOYED</span></div>
+                <div class="payload-prompt"><span class="prompt-symbol">$</span> <a href="https://github.com/hak5/wifipineapplepager-payloads/tree/master/library/user/reconnaissance/curly" target="_blank" rel="noopener noreferrer" class="payload-link">View on GitHub →</a></div>
+              </div>
+            </div>
+
+            <div class="payload-card" role="group" aria-label="Payload 2 of 4: Nosey Neighbor" aria-hidden="true">
+              <div class="payload-terminal-bar">
+                <span class="payload-dot red"></span>
+                <span class="payload-dot yellow"></span>
+                <span class="payload-dot green"></span>
+                <span class="payload-terminal-title">The Nosey Neighbor · payload.sh</span>
+                <span class="payload-award">🏆 AWARD WINNER</span>
+              </div>
+              <div class="payload-terminal-body">
+                <div class="payload-prompt"><span class="prompt-symbol">$</span> cat README.md</div>
+                <div class="payload-field"><span class="field-label">PAYLOAD:</span> The Nosey Neighbor</div>
+                <div class="payload-field"><span class="field-label">CATEGORY:</span> Reconnaissance (Passive)</div>
+                <div class="payload-field"><span class="field-label">DESCRIPTION:</span> Passive wireless recon toolkit that discovers APs on 2.4 &amp; 5 GHz, collects probed SSIDs, identifies device vendors, GPS geo-tags findings, captures traffic, and compiles a full intel report.</div>
+                <div class="payload-field"><span class="field-label">AWARD:</span> <a href="https://payloadhub.com/blogs/payloads/the-nosey-neighbor" target="_blank" rel="noopener noreferrer" class="payload-link">Hak5 Featured Payload on PayloadHub ↗</a></div>
+                <div class="payload-status-line"><span class="field-label">STATUS:</span> <span class="payload-status deployed">DEPLOYED</span></div>
+                <div class="payload-prompt"><span class="prompt-symbol">$</span> <a href="https://github.com/hak5/wifipineapplepager-payloads/tree/master/library/user/reconnaissance/nosey-neighbor" target="_blank" rel="noopener noreferrer" class="payload-link">View on GitHub →</a></div>
+              </div>
+            </div>
+
+            <div class="payload-card" role="group" aria-label="Payload 3 of 4: Incident Response" aria-hidden="true">
+              <div class="payload-terminal-bar">
+                <span class="payload-dot red"></span>
+                <span class="payload-dot yellow"></span>
+                <span class="payload-dot green"></span>
+                <span class="payload-terminal-title">Incident Response · payload.sh</span>
+              </div>
+              <div class="payload-terminal-body">
+                <div class="payload-prompt"><span class="prompt-symbol">$</span> cat README.md</div>
+                <div class="payload-field"><span class="field-label">PAYLOAD:</span> Incident Response</div>
+                <div class="payload-field"><span class="field-label">CATEGORY:</span> Incident Response</div>
+                <div class="payload-field"><span class="field-label">DESCRIPTION:</span> IR toolkit payload for rapid wireless incident triage and evidence capture.</div>
+                <div class="payload-status-line"><span class="field-label">STATUS:</span> <span class="payload-status pending">AWAITING REVIEW</span></div>
+                <div class="payload-prompt"><span class="prompt-symbol">$</span> <a href="https://github.com/hak5/wifipineapplepager-payloads/pull/304" target="_blank" rel="noopener noreferrer" class="payload-link">View Pull Request →</a></div>
+              </div>
+            </div>
+
+            <div class="payload-card" role="group" aria-label="Payload 4 of 4: HandyShake" aria-hidden="true">
+              <div class="payload-terminal-bar">
+                <span class="payload-dot red"></span>
+                <span class="payload-dot yellow"></span>
+                <span class="payload-dot green"></span>
+                <span class="payload-terminal-title">HandyShake · payload.sh</span>
+              </div>
+              <div class="payload-terminal-body">
+                <div class="payload-prompt"><span class="prompt-symbol">$</span> cat README.md</div>
+                <div class="payload-field"><span class="field-label">PAYLOAD:</span> HandyShake</div>
+                <div class="payload-field"><span class="field-label">CATEGORY:</span> Alert / Handshake Capture</div>
+                <div class="payload-field"><span class="field-label">DESCRIPTION:</span> Enhanced handshake capture alert with device intelligence, vendor lookup (OUI + whoismac), EAPOL/PMKID detection, crackability status, duplicate suppression, GPS tagging, auto-rename PCAP, and adaptive LED/vibration feedback.</div>
+                <div class="payload-status-line"><span class="field-label">STATUS:</span> <span class="payload-status deployed">DEPLOYED</span></div>
+                <div class="payload-prompt"><span class="prompt-symbol">$</span> <a href="https://github.com/hak5/wifipineapplepager-payloads/tree/master/library/alerts/handshake_captured/handyshake" target="_blank" rel="noopener noreferrer" class="payload-link">View on GitHub →</a></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-arrow carousel-prev" aria-label="Previous payload">&#8592;</button>
+        <div class="carousel-dots">
+          <button class="carousel-dot active" data-index="0" aria-label="Curly"></button>
+          <button class="carousel-dot" data-index="1" aria-label="Nosey Neighbor"></button>
+          <button class="carousel-dot" data-index="2" aria-label="Incident Response"></button>
+          <button class="carousel-dot" data-index="3" aria-label="HandyShake"></button>
+        </div>
+        <button class="carousel-arrow carousel-next" aria-label="Next payload">&#8594;</button>
+      </div>
+      <div class="carousel-counter"><span id="payloadCurrent">1</span> / 4</div>
+    </section>
+
+    <!-- ===== TIPS ===== -->
+    <section>
+      <span class="section-label">Tips &amp; Tricks</span>
       <div class="tips-list">
-        <div class="tip"><strong>🔒 Use a Password Manager:</strong> Never reuse passwords. Tools like Bitwarden or KeePassXC keep your credentials safe and unique.</div>
-        <div class="tip"><strong>🦠 Don’t Trust Attachments:</strong> Even if it looks like it’s from a friend, always verify before opening unexpected files.</div>
+        <div class="tip"><strong>🔒 Use a Password Manager:</strong> Never reuse passwords. Tools like <a href="https://bitwarden.com/" target="_blank" rel="noopener noreferrer"> Bitwarden</a> or <a href="https://keepassxc.org/" target="_blank" rel="noopener noreferrer">KeePassXC</a> keep your credentials safe and unique.</div>
+        <div class="tip"><strong>🦠 Don't Trust Attachments:</strong> Even if it looks like it's from a friend, always verify before opening unexpected files.</div>
         <div class="tip"><strong>💻 Practice in a Lab:</strong> Set up a virtual lab with Kali Linux and vulnerable VMs (like Metasploitable) to safely learn and test.</div>
-        <div class="tip"><strong>🕵️‍♂️ Use OSINT Tools:</strong> Tools like <a target="_blank" rel="noopener noreferrer" href="//osintframework.com/">OSINT Framework</a> help you gather info for recon and investigations.</div>
-        <div class="tip"><strong>📚 Keep Learning:</strong> Follow <a target="_blank" rel="noopener noreferrer" href="//www.hackerone.com/blog">HackerOne</a> and <a target="_blank" rel="noopener noreferrer" href="//www.cybersecuritynews.com/">Cybersecurity News</a> for the latest vulnerabilities and techniques.</div>
+        <div class="tip"><strong>🕵️‍♂️ Use OSINT Tools:</strong> Tools like <a href="https://osintframework.com/" target="_blank" rel="noopener noreferrer">OSINT Framework</a> help you gather info for recon and investigations.</div>
+        <div class="tip"><strong>📚 Keep Learning:</strong> Follow <a href="https://www.hackerone.com/blog" target="_blank" rel="noopener noreferrer">HackerOne</a> and <a href="https://www.cybersecuritynews.com/" target="_blank" rel="noopener noreferrer">Cybersecurity News</a> for the latest. Keep your skills sharp at <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">Hack the Box</a>.</div>
       </div>
     </section>
-    <section class="security-feed-section">
-      <h3>Live Security Feed</h3>
+
+    <!-- Supascribe newsletter popup -->
+    <div data-supascribe-embed-id="384406187131" data-supascribe-popup></div>
+    <script src="https://js.supascribe.com/v1/loader/dHACOIpanyZQMjr8RmUC0AMCfX42.js" async></script>
+
+    <!-- ===== SECURITY FEED ===== -->
+    <section>
+      <span class="section-label">Live Security Feed</span>
       <div class="security-feed" id="securityFeed">
         <div class="security-feed-line">[12:00:01] IDS initialized. Monitoring network traffic...</div>
       </div>
     </section>
-    <section class="cli-box" id="cliBox">
-      <div class="cli-motd" id="cliMotd">
-        <span id="motdText"></span>
+
+    <!-- ===== CLI ===== -->
+    <div class="cli-block">
+      <span class="section-label">Interactive Shell</span>
+      <section class="cli-box" id="cliBox">
+        <div class="cli-motd" id="cliMotd"><span id="motdText"></span></div>
+        <div class="cli-statusbar" id="cliStatusbar"><span class="cli-clock" id="cliClock"></span></div>
+        <div id="cliOutput"></div>
+        <form id="cliForm" autocomplete="off">
+          <span class="cli-prompt-full">curt@portfolio:~$</span>
+          <span class="cli-prompt-short">$</span>
+          <input id="cliInput"
+            placeholder="type a command (try: help)"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="none"
+            spellcheck="false"
+            inputmode="text">
+          <button type="submit" id="cliSendBtn" aria-label="Send command">↵</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- ===== SYSTEM INFO ===== -->
+    <div class="system-info" id="systemInfo">
+      <div class="system-info-box">
+        <div class="system-info-header">
+          <span class="section-label">🧠 Visitor System Info</span>
+          <span class="visitor-privacy-note" id="privacyGlitch">No data stored. No cookies 🍪</span>
+        </div>
+        <div class="sysinfo-grid">
+          <p><strong>Browser:</strong> <span id="ua"></span></p>
+          <p><strong>Platform:</strong> <span id="platform"></span></p>
+          <p><strong>IP Address:</strong> <span id="ip"></span></p>
+          <p><strong>ISP:</strong> <span id="ip-location"></span></p>
+          <p><strong>Organization:</strong> <span id="si-org"></span></p>
+          <p><strong>AS Number:</strong> <span id="si-asn"></span></p>
+          <p><strong>Country:</strong> <span id="si-country"></span></p>
+          <p><strong>Region:</strong> <span id="si-region"></span></p>
+          <p><strong>City:</strong> <span id="si-city"></span></p>
+          <p><strong>ZIP / Postal:</strong> <span id="si-zip"></span></p>
+          <p><strong>Coordinates:</strong> <span id="si-coords"></span></p>
+          <p><strong>Timezone:</strong> <span id="si-timezone"></span></p>
+          <p><strong>Language:</strong> <span id="si-lang"></span></p>
+          <p><strong>Screen:</strong> <span id="si-screen"></span></p>
+          <p><strong>Viewport:</strong> <span id="si-viewport"></span></p>
+          <p><strong>Color Depth:</strong> <span id="si-color"></span></p>
+          <p><strong>CPU Cores:</strong> <span id="si-cpu"></span></p>
+          <p><strong>Device Memory:</strong> <span id="si-mem"></span></p>
+          <p><strong>Connection:</strong> <span id="si-conn"></span></p>
+          <p><strong>Touch Support:</strong> <span id="si-touch"></span></p>
+          <p><strong>Do Not Track:</strong> <span id="si-dnt"></span></p>
+        </div>
+        <div id="ip-map" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-top:10px;display:none;border:1px solid var(--border)"></div>
       </div>
-      <div class="cli-statusbar" id="cliStatusbar">
-        <span class="cli-clock" id="cliClock"></span>
-      </div>
-      <div id="cliOutput"></div>
-      <form id="cliForm" autocomplete="off">
-        <span>curt@portfolio:~$</span>
-        <input id="cliInput" placeholder="type your command here">
-      </form>
-    </section>
-    <section class="system-info" id="systemInfo">
-      <div class="system-info-header">
-        <h3>🧠 Visitor System Info</h3>
-        <span class="visitor-privacy-note" id="privacyGlitch">I don’t save any of this data. This is for your 👀 eyes only. I don't want your cookies 🍪 either.</span>
-      </div>
-      <p><strong>User Agent:</strong> <span id="ua"></span></p>
-      <p><strong>Platform:</strong> <span id="platform"></span></p>
-      <p><strong>IP Address:</strong> <span id="ip"></span></p>
-      <p><strong>ISP Location:</strong> <span id="ip-location"></span></p>
-      <div id="ip-map" style="width:100%;height:220px;border-radius:8px;overflow:hidden;margin-top:8px;display:none"></div>
-    </section>
-    <section class="vuln-policy-section">
-      <h3>Vulnerability Disclosure Policy</h3>
+    </div>
+
+    <!-- ===== VULN DISCLOSURE ===== -->
+    <section>
+      <span class="section-label">Vulnerability Disclosure Policy</span>
       <div class="vuln-policy-box">
         <p>I take security seriously. If you discover a vulnerability or security issue related to any of my projects or services, please report it responsibly.<br>
-        <strong>Contact:</strong> <a href="mailto:curtthecoder@proton.me">curtthecoder@proton.me</a></p>
+        <strong>Contact:</strong> <a id="vulnEmail" href="#">[loading]</a></p>
         <ul>
           <li>Do not publicly disclose the issue before I have a chance to address it.</li>
           <li>Provide as much detail as possible for efficient triage and resolution.</li>
@@ -277,41 +609,243 @@
         </ul>
       </div>
     </section>
+
+    <!-- ===== FOOTER ===== -->
     <footer>
-      <p>Created and Secured By <code>Curt --Hayman,CEH</code> | Not hard to find!
-        <a target="_blank" rel="noopener noreferrer" class="social-link" href="//github.com/curthayman" aria-label="GitHub">
-          <svg width="22" height="22" fill="#00ff99" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 2.045.138 3.003.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        </a>
-        <span class="social-icons">
-          <a target="_blank" rel="noopener noreferrer" class="social-link" href="//www.facebook.com/imcurthayman/" aria-label="Facebook">
-            <svg width="22" height="22" fill="#00ff99" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg>
+      <div class="footer-inner">
+        <p class="footer-byline">Created and Secured By <code>Curt --Hayman,CEH</code></p>
+        <div class="social-icons">
+          <a href="https://github.com/curthayman" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="color:var(--text-muted)"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 2.045.138 3.003.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
           </a>
-          <a target="_blank" rel="noopener noreferrer" class="social-link" href="//x.com/curtishayman" aria-label="Twitter">
-            <svg width="22" height="22" fill="#00ff99" viewBox="0 0 24 24"><path d="M24 4.557a9.93 9.93 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195a4.916 4.916 0 0 0-8.38 4.482C7.691 8.095 4.066 6.13 1.64 3.161c-.542.929-.856 2.01-.857 3.17 0 2.188 1.115 4.116 2.823 5.247a4.904 4.904 0 0 1-2.229-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.209c9.142 0 14.307-7.721 13.995-14.646A9.936 9.936 0 0 0 24 4.557z"/></svg>
+          <a href="https://www.facebook.com/imcurthayman/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="color:var(--text-muted)"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg>
           </a>
-          <a target="_blank" rel="noopener noreferrer" class="social-link" href="//www.instagram.com/imcurthayman/" aria-label="Instagram">
-            <svg width="22" height="22" fill="#00ff99" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.974-.974 2.241-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.131 4.659.425 3.678 1.406c-.98.98-1.274 2.092-1.334 3.374C2.013 5.668 2 6.077 2 12c0 5.923.013 6.332.072 7.612.06 1.282.354 2.394 1.334 3.374.98.98 2.092 1.274 3.374 1.334C8.332 23.987 8.741 24 12 24s3.668-.013 4.948-.072c1.282-.06 2.394-.354 3.374-1.334.98-.98 1.274-2.092 1.334-3.374.059-1.28.072-1.689.072-7.612 0-5.923-.013-6.332-.072-7.612-.06-1.282-.354-2.394-1.334-3.374-.98-.98-2.092-1.274-3.374-1.334C15.668.013 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          <a href="https://x.com/curtishayman" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X / Twitter">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="color:var(--text-muted)"><path d="M24 4.557a9.93 9.93 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195a4.916 4.916 0 0 0-8.38 4.482C7.691 8.095 4.066 6.13 1.64 3.161c-.542.929-.856 2.01-.857 3.17 0 2.188 1.115 4.116 2.823 5.247a4.904 4.904 0 0 1-2.229-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.209c9.142 0 14.307-7.721 13.995-14.646A9.936 9.936 0 0 0 24 4.557z"/></svg>
           </a>
-          <a target="_blank" rel="noopener noreferrer" class="social-link" href="//www.linkedin.com/in/curtishayman/" aria-label="LinkedIn">
-            <svg width="22" height="22" fill="#00ff99" viewBox="0 0 24 24"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.75 20h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76c.97 0 1.75.79 1.75 1.76s-.78 1.76-1.75 1.76zm15.25 11.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.88v1.36h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v5.59z"/></svg>
+          <a href="https://www.instagram.com/imcurthayman/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="color:var(--text-muted)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.974-.974 2.241-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.131 4.659.425 3.678 1.406c-.98.98-1.274 2.092-1.334 3.374C2.013 5.668 2 6.077 2 12c0 5.923.013 6.332.072 7.612.06 1.282.354 2.394 1.334 3.374.98.98 2.092 1.274 3.374 1.334C8.332 23.987 8.741 24 12 24s3.668-.013 4.948-.072c1.282-.06 2.394-.354 3.374-1.334.98-.98 1.274-2.092 1.334-3.374.059-1.28.072-1.689.072-7.612 0-5.923-.013-6.332-.072-7.612-.06-1.282-.354-2.394-1.334-3.374-.98-.98-2.092-1.274-3.374-1.334C15.668.013 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
           </a>
-          <a target="_blank" rel="noopener noreferrer" class="social-link" href="//www.xbox.com/en-US/play/user/curtthecoder830" aria-label="Xbox">
-            <svg width="22" height="22" fill="#00ff99" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm5.93 5.343c.29.29.563.597.818.92-2.13-.97-4.37-1.5-6.748-1.5-2.377 0-4.617.53-6.747 1.5.255-.323.528-.63.818-.92C7.6 5.13 9.74 4.5 12 4.5c2.26 0 4.4.63 5.93 2.843zm-11.86 9.314c-.29-.29-.563-.597-.818-.92 2.13.97 4.37 1.5 6.748 1.5 2.377 0 4.617-.53 6.747-1.5-.255.323-.528.63-.818.92C16.4 18.87 14.26 19.5 12 19.5c-2.26 0-4.4-.63-5.93-2.843zm9.13-2.157c-.44.44-1.15.44-1.59 0l-1.48-1.48-1.48 1.48c-.44.44-1.15.44-1.59 0-.44-.44-.44-1.15 0-1.59l1.48-1.48-1.48-1.48c-.44-.44-.44-1.15 0-1.59.44-.44 1.15-.44 1.59 0l1.48 1.48 1.48-1.48c.44-.44 1.15-.44 1.59 0 .44.44.44 1.15 0 1.59l-1.48 1.48 1.48 1.48c.44.44.44 1.15 0 1.59z"/></svg>
+          <a href="https://www.linkedin.com/in/curtishayman/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="color:var(--text-muted)"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.75 20h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76c.97 0 1.75.79 1.75 1.76s-.78 1.76-1.75 1.76zm15.25 11.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.88v1.36h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v5.59z"/></svg>
           </a>
-        </span>
-      </p>
-      <div class="visitor-privacy-note privacy-glitching" style="margin:1.2em auto 0 auto;max-width:600px;text-align:center;font-size:1.1em">This site, as coded, is 🍪 cookie-free for visitors.</div>
+          <a href="https://www.xbox.com/en-US/play/user/curtthecoder830" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Xbox">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="color:var(--text-muted)"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm5.93 5.343c.29.29.563.597.818.92-2.13-.97-4.37-1.5-6.748-1.5-2.377 0-4.617.53-6.747 1.5.255-.323.528-.63.818-.92C7.6 5.13 9.74 4.5 12 4.5c2.26 0 4.4.63 5.93 2.843zm-11.86 9.314c-.29-.29-.563-.597-.818-.92 2.13.97 4.37 1.5 6.748 1.5 2.377 0 4.617-.53 6.747-1.5-.255.323-.528.63-.818.92C16.4 18.87 14.26 19.5 12 19.5c-2.26 0-4.4-.63-5.93-2.843zm9.13-2.157c-.44.44-1.15.44-1.59 0l-1.48-1.48-1.48 1.48c-.44.44-1.15.44-1.59 0-.44-.44-.44-1.15 0-1.59l1.48-1.48-1.48-1.48c-.44-.44-.44-1.15 0-1.59.44-.44 1.15-.44 1.59 0l1.48 1.48 1.48-1.48c.44-.44 1.15-.44 1.59 0 .44.44.44 1.15 0 1.59l-1.48 1.48 1.48 1.48c.44.44.44 1.15 0 1.59z"/></svg>
+          </a>
+        </div>
+        <div style="margin: 0.4rem 0;">
+        </div>
+        <div class="visitor-counter-line" id="visitorCounterLine">
+          <span class="visitor-counter-label">Visitors</span>
+          <span class="visitor-counter-number" id="visitorCount">---</span>
+        </div>
+        <p class="footer-privacy">This site, as coded, is 🍪 cookie-free for visitors.</p>
+      </div>
     </footer>
+
+    <!-- ===== BACK TO TOP ===== -->
     <button id="backToTopBtn" title="Back to top">
-      <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
-        <path d="M12 19V5M12 5L5 12M12 5l7 7" stroke="#00ff99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <path d="M12 19V5M12 5L5 12M12 5l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted)"/>
       </svg>
     </button>
+
+    <!-- Required stubs so scripts.js doesn't throw null errors -->
+    <div id="matrixLoader" style="display:none" aria-hidden="true">
+      <div class="matrix-loader-content">
+        <pre id="matrixLoadingText"></pre>
+      </div>
+    </div>
+    <canvas id="matrix-canvas" style="display:none" aria-hidden="true"></canvas>
+    <div id="hacker-cursor" style="display:none" aria-hidden="true"></div>
+    <span id="glitchTitle" style="display:none" aria-hidden="true"></span>
+
+    <script>
+      // Assemble email at runtime — never exposed in raw HTML source
+      document.addEventListener('DOMContentLoaded', function() {
+        var u = 'curtthecoder';
+        var d = 'proton' + '.' + 'me';
+        var addr = u + '@' + d;
+        ['contactEmail', 'vulnEmail'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) { el.href = 'mailto:' + addr; el.textContent = addr; }
+        });
+      });
+    </script>
     <script src="scripts.js" defer></script>
     <script src="accessibility.js" defer></script>
     <script src="hireBanner.js" defer></script>
-    <canvas id="matrix-canvas" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999"></canvas>
-    <div id="hacker-cursor"></div>
+
+    <!-- Wardriving passive scan animation -->
+    <script>
+      (function() {
+        var ssids = [
+          'NETGEAR42','xfinitywifi','ATT-WIFI-6G','Spectrum-2G-Home',
+          'DIRECT-roku-F27B3','AndroidAP_5523','linksys','TP-Link_7A3F',
+          '[Hidden Network]','MySpectrumWiFi-5G','FBI Surveillance Van',
+          'Pretty Fly for a WiFi','Bill Wi the Science Fi','SkyNet_Node_01',
+          'CenturyLink1234','ASUS_RT-AX88U','Xfinity_Guest','Google-Home-Mini',
+          'HP-Print-A2-LaserJet','Neighbors-2.4G','DROP-WHILE-WARDRIVING',
+          'dlink','belkin.5GHz','ORBI95','Airport_Free_WiFi',
+          'OpenWrt_5G','Verizon-MiFi-8800','HideYoKidsHideYoWifi',
+        ];
+        var encs = ['WPA3','WPA2','WPA2','WPA2','WPA3','WPA2','OPEN','WPA2','WPA2','WPA3'];
+        var signals = ['▂▄▆█','▂▄▆_','▂▄__','▂___'];
+        var colors  = ['#22c55e','#84cc16','#eab308','#ef4444'];
+
+        function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function randCh()  { return Math.floor(Math.random() * 13) + 1; }
+
+        var list = document.getElementById('wdScanList');
+        if (!list) return;
+
+        var MAX_ROWS = 7;
+
+        function addRow() {
+          var sigIdx = Math.floor(Math.random() * signals.length);
+          var row = document.createElement('div');
+          row.className = 'wd-scan-row';
+          row.style.animationDelay = '0s';
+
+          var sigSpan = document.createElement('span');
+          sigSpan.className = 'wd-signal';
+          sigSpan.style.color = colors[sigIdx];
+          sigSpan.textContent = signals[sigIdx];
+
+          var ssidSpan = document.createElement('span');
+          ssidSpan.className = 'wd-ssid';
+          ssidSpan.textContent = rand(ssids);
+
+          var encSpan = document.createElement('span');
+          encSpan.className = 'wd-enc';
+          encSpan.textContent = rand(encs);
+
+          var chSpan = document.createElement('span');
+          chSpan.className = 'wd-ch';
+          chSpan.textContent = 'CH' + randCh();
+
+          row.appendChild(sigSpan);
+          row.appendChild(ssidSpan);
+          row.appendChild(encSpan);
+          row.appendChild(chSpan);
+          list.appendChild(row);
+
+          // keep list trimmed
+          while (list.children.length > MAX_ROWS) {
+            list.removeChild(list.firstChild);
+          }
+        }
+
+        // seed initial rows
+        for (var i = 0; i < 5; i++) { addRow(); }
+
+        // add a new row every 1.8s
+        setInterval(addRow, 1800);
+      })();
+    </script>
+
+    <!-- Extra visitor system info -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+
+        // Instant browser/device fields — no API needed
+        var set = function(id, val) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = val || 'Unavailable';
+        };
+
+        set('si-timezone',  Intl.DateTimeFormat().resolvedOptions().timeZone);
+        set('si-lang',      navigator.language || (navigator.languages && navigator.languages[0]));
+        set('si-screen',    screen.width + ' × ' + screen.height + '  (' + window.devicePixelRatio + 'x DPR)');
+        set('si-viewport',  window.innerWidth + ' × ' + window.innerHeight + 'px');
+        set('si-color',     screen.colorDepth + '-bit');
+        set('si-cpu',       navigator.hardwareConcurrency ? navigator.hardwareConcurrency + ' logical cores' : 'Unavailable');
+        set('si-touch',     navigator.maxTouchPoints > 0 ? 'Yes (' + navigator.maxTouchPoints + ' points)' : 'No');
+
+        var dnt = navigator.doNotTrack || window.doNotTrack;
+        set('si-dnt', dnt === '1' || dnt === 'yes' ? 'Enabled' : dnt === '0' ? 'Disabled' : 'Not set');
+
+        var mem = navigator.deviceMemory;
+        set('si-mem', mem ? '≈ ' + mem + ' GB' : 'Unavailable');
+
+        var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        if (conn) {
+          var parts = [];
+          if (conn.effectiveType) parts.push(conn.effectiveType.toUpperCase());
+          if (conn.downlink)      parts.push(conn.downlink + ' Mbps');
+          if (conn.rtt)           parts.push(conn.rtt + 'ms RTT');
+          set('si-conn', parts.length ? parts.join(' · ') : 'Unknown');
+        } else {
+          set('si-conn', 'Unavailable');
+        }
+
+        // Fetch IP geo data from ipapi.co (already used by scripts.js, proven to work)
+        fetch('https://ipapi.co/json/')
+          .then(function(r) { return r.json(); })
+          .then(function(d) {
+            if (!d || d.error) return;
+
+            // IP address (only fill if scripts.js hasn't yet)
+            var ipEl = document.getElementById('ip');
+            if (ipEl && (!ipEl.textContent || ipEl.textContent === 'Unavailable')) {
+              ipEl.textContent = d.ip || 'Unavailable';
+            }
+
+            // Parse ASN + org from combined "org" field e.g. "AS7922 Comcast Cable"
+            var orgRaw = d.org || '';
+            var asnMatch = orgRaw.match(/^(AS\d+)\s*(.*)$/);
+            var asnNum  = asnMatch ? asnMatch[1] : null;
+            var orgName = asnMatch ? asnMatch[2] : (orgRaw || null);
+
+            set('si-org',  orgName);
+            set('si-asn',  asnNum);
+
+            // Country
+            set('si-country', d.country_name && d.country ? d.country_name + ' (' + d.country + ')' : d.country_name || null);
+
+            // Region
+            set('si-region', d.region || null);
+
+            // City
+            set('si-city', d.city || null);
+
+            // ZIP / Postal
+            set('si-zip', d.postal || null);
+
+            // Coordinates
+            if (d.latitude != null && d.longitude != null) {
+              set('si-coords', parseFloat(d.latitude).toFixed(4) + ', ' + parseFloat(d.longitude).toFixed(4));
+            } else {
+              set('si-coords', null);
+            }
+          })
+          .catch(function() {
+            // Silent fail — fields stay as 'Unavailable'
+          });
+      });
+    </script>
+
+    <!-- Dark mode toggle logic -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var toggle = document.getElementById('themeToggle');
+        var icon   = document.getElementById('themeIcon');
+        var label  = document.getElementById('themeLabel');
+        function syncToggle() {
+          var dark = document.documentElement.classList.contains('dark');
+          icon.textContent  = dark ? '☀' : '☾';
+          label.textContent = dark ? 'Light' : 'Dark';
+          toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        syncToggle();
+        toggle.addEventListener('click', function() {
+          document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+          syncToggle();
+        });
+      });
+    </script>
   </main>
 </body>
 </html>
