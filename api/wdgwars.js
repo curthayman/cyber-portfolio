@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const key = process.env.WDG_API_KEY;
   if (!key) {
     return res.status(500).json({ error: 'API key not configured' });
