@@ -1019,21 +1019,19 @@ function animateCounter(el, target) {
     fetch('/api/wdgwars')
       .then(function (r) { return r.json(); })
       .then(function (d) {
-        if (d.error) return; // API returned an error — keep current values
-
-        var s = d.stats || {};
+        if (!d.ok) return; // API returned an error — keep current values
 
         // Identity
         setText('wdgGang',    d.gang);
         setText('wdgCountry', d.country);
         setText('wdgJoined',  formatDate(d.joined));
 
-        // Stats
-        setText('wdgTotal', s.total    != null ? Number(s.total).toLocaleString()    : null);
-        setText('wdgWifi',  s.wifi     != null ? Number(s.wifi).toLocaleString()     : null);
-        setText('wdgBle',   s.ble      != null ? Number(s.ble).toLocaleString()      : null);
-        setText('wdgAdsb',  s.aircraft != null ? Number(s.aircraft).toLocaleString() : null);
-        setText('wdgMesh',  s.mesh     != null ? Number(s.mesh).toLocaleString()     : null);
+        // Stats (flat on /api/me)
+        setText('wdgTotal', d.total    != null ? Number(d.total).toLocaleString()    : null);
+        setText('wdgWifi',  d.wifi     != null ? Number(d.wifi).toLocaleString()     : null);
+        setText('wdgBle',   d.ble      != null ? Number(d.ble).toLocaleString()      : null);
+        setText('wdgAdsb',  d.aircraft != null ? Number(d.aircraft).toLocaleString() : null);
+        setText('wdgMesh',  d.mesh     != null ? Number(d.mesh).toLocaleString()     : null);
 
         // Recent activity
         setText('wdgToday', d.recent_today != null ? Number(d.recent_today).toLocaleString() : null);

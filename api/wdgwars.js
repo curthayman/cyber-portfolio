@@ -6,7 +6,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const upstream = await fetch(
-      'https://wdgwars.pl/api/users/curtthecoder/stats',
+      'https://wdgwars.pl/api/me',
       { headers: { 'X-API-Key': key } }
     );
     if (!upstream.ok) {
