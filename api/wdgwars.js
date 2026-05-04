@@ -15,7 +15,7 @@ module.exports = async function handler(req, res) {
     const data = await upstream.json();
     // Cache for 5 minutes on Vercel's edge
     res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate');
-    return res.status(200).json(data);
+    return res.status(200).json({ ok: true, ...data });
   } catch {
     return res.status(502).json({ error: 'Failed to reach WDGoWars' });
   }
